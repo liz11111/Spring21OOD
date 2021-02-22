@@ -10,8 +10,8 @@ public class PolynomialElementNode implements PolynomialNode {
    * Constructor for an element node in the polynomial.
    *
    * @param coefficient int coefficient of a term
-   * @param power int power of a term
-   * @param rest PolynomialNode object the rest of list object
+   * @param power       int power of a term
+   * @param rest        PolynomialNode object the rest of list object
    */
   public PolynomialElementNode(int coefficient, int power, PolynomialNode rest) {
     this.coefficient = coefficient;

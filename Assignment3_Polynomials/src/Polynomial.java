@@ -1,14 +1,14 @@
 /**
- * Polynomial interface specifies the contract Polynomial(s) will adhere to.
- * It supports common polynomial algebraic operations, such as add a term, remove a term,
- * get degree, get coefficient, evaluate and add two polynomials together.
+ * Polynomial interface specifies the contract Polynomial(s) will adhere to. It supports common
+ * polynomial algebraic operations, such as add a term, remove a term, get degree, get coefficient,
+ * evaluate and add two polynomials together.
  */
 public interface Polynomial {
   /**
    * addTerm takes a coefficient and a power and addes the resulting term to polynomial.
    *
    * @param coefficient int coefficient of the term
-   * @param power int power of the term
+   * @param power       int power of the term
    * @throws IllegalArgumentException if power is negative
    */
   public void addTerm(int coefficient, int power) throws IllegalArgumentException;

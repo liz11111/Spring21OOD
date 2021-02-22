@@ -38,7 +38,7 @@ public class PolynomialImpl implements Polynomial {
    * addTerm takes a coefficient and a power and addes the resulting term to polynomial.
    *
    * @param coefficient int coefficient of the term
-   * @param power int power of the term
+   * @param power       int power of the term
    * @throws IllegalArgumentException if power is negative
    */
   @Override

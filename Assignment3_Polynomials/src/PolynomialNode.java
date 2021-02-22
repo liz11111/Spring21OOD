@@ -6,7 +6,7 @@ public interface PolynomialNode {
    * addTerm adds a new node to the polynomial.
    *
    * @param coefficient int coefficient of the new term
-   * @param power int power of the new term
+   * @param power       int power of the new term
    */
   public PolynomialNode addTerm(int coefficient, int power);
 
