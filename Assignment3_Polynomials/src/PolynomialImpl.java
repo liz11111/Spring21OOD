@@ -106,6 +106,9 @@ public class PolynomialImpl implements Polynomial {
     }
   }
 
+  /**
+   * reinitialize the polynomial when the last elementNode has been removed.
+   */
   private void reinitialize() {
     if (getDegree() == -1) {
       head = new PolynomialElementNode(0, 0, new PolynomialEmptyNode());
