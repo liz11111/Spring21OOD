@@ -18,7 +18,7 @@ public class PolynomialImpl implements Polynomial {
    * @throws IllegalArgumentException if trying to initialize a term with negative power
    */
   public PolynomialImpl(String in) throws IllegalArgumentException {
-    head = new PolynomialElementNode(0, 0, new PolynomialEmptyNode());
+    this();
 
     String[] array = in.split(" ");
     for (int i = 0; i < array.length; i++) {
