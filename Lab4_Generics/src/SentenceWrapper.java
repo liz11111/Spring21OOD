@@ -37,25 +37,14 @@ public class SentenceWrapper implements Sentence {
   }
 
   @Override
-  public int numOfPuncs(Predicate<SentenceElt> pred) {
-    int puncs = 0;
+  public int reduce(Predicate<SentenceElt> pred) {
+    int result = 0;
     for (SentenceElt node : sentence) {
-      if ((node instanceof Punctuation) && pred.test(node)) {
-        puncs++;
+      if (pred.test(node)) {
+        result++;
       }
     }
-    return puncs;
-  }
-
-  @Override
-  public int numOfWordsWithZ(Predicate<SentenceElt> pred) {
-    int withZ = 0;
-    for (SentenceElt node : sentence) {
-      if ((node instanceof Word) && pred.test(node)) {
-        withZ++;
-      }
-    }
-    return withZ;
+    return result;
   }
 
   @Override

@@ -1,28 +1,12 @@
-import java.util.function.Predicate;
-
 /**
  * SentenceElt class is an abstract class for nodes in a sentence.
  */
-public abstract class SentenceElt implements Predicate<SentenceElt> {
+public abstract class SentenceElt {
   protected String content;
 
   public SentenceElt(String content) {
     this.content = content;
   }
-
-  /**
-   * isPunc checks whether a node is an punctuation.
-   *
-   * @return boolean if it is a punc
-   */
-  public abstract boolean isPunc();
-
-  /**
-   * hasZ checks whether a node has letter z in it.
-   *
-   * @return boolean if it has z
-   */
-  public abstract boolean hasZ();
 
   /**
    * translate translates a word node from English to PigLatin.
@@ -38,4 +22,17 @@ public abstract class SentenceElt implements Predicate<SentenceElt> {
    */
   public abstract String toString();
 
+  /**
+   * isPunc returns if a node is a punctuation.
+   *
+   * @return boolean if it is a puncutation node
+   */
+  public abstract boolean isPunc();
+
+  /**
+   * hasZ returns if a node has z.
+   *
+   * @return boolean if it has z
+   */
+  public abstract boolean hasZ();
 }

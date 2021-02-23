@@ -1,6 +1,5 @@
 import java.util.HashSet;
 import java.util.Set;
-import java.util.function.Predicate;
 
 /**
  * Word is a word node in a sentence.
@@ -8,16 +7,6 @@ import java.util.function.Predicate;
 public class Word extends SentenceElt {
   public Word(String content) {
     super(content);
-  }
-
-  @Override
-  public boolean isPunc() {
-    return false;
-  }
-
-  @Override
-  public boolean hasZ() {
-    return this.content.contains("Z") || this.content.contains("z");
   }
 
   @Override
@@ -45,9 +34,14 @@ public class Word extends SentenceElt {
     return " " + this.content;
   }
 
+  @Override
+  public boolean isPunc() {
+    return false;
+  }
 
   @Override
-  public boolean test(SentenceElt sentenceElt) {
+  public boolean hasZ() {
     return this.content.contains("Z") || this.content.contains("z");
   }
+
 }

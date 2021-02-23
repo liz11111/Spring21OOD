@@ -1,6 +1,8 @@
 import org.junit.Before;
 import org.junit.Test;
 
+import java.util.function.Predicate;
+
 import static org.junit.Assert.assertEquals;
 
 /**
@@ -20,16 +22,20 @@ public class SentenceTest {
 
   @Test
   public void testPunc() {
-    assertEquals(2, s1.numOfPuncs(new Punctuation("")));
-    assertEquals(3, s2.numOfPuncs(new Punctuation("")));
-    assertEquals(0, pL.numOfPuncs(new Punctuation("")));
+    assertEquals(2, s1.reduce(new Predicate<SentenceElt>() {
+      @Override
+      public boolean test(SentenceElt node) {
+        return node.isPunc();
+      }
+    }));
+    assertEquals(3, s2.reduce((SentenceElt node) -> node.isPunc()));
+    assertEquals(0, pL.reduce((SentenceElt node) -> node.isPunc()));
   }
 
   @Test
   public void testZ() {
-    assertEquals(0, s1.numOfWordsWithZ(new Word("")));
-    assertEquals(3, s2.numOfWordsWithZ((SentenceElt s) -> s.content.contains("Z")));
-    assertEquals(0, pL.numOfWordsWithZ(new Word("")));
+    assertEquals(0, s1.reduce((SentenceElt node) -> node.hasZ()));
+    assertEquals(3, s2.reduce((SentenceElt node) -> node.hasZ()));
   }
 
   @Test

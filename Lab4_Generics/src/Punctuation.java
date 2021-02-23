@@ -1,4 +1,3 @@
-import java.util.function.Predicate;
 
 /**
  * Punctuation is a punctuation node in a sentence.
@@ -6,16 +5,6 @@ import java.util.function.Predicate;
 public class Punctuation extends SentenceElt {
   public Punctuation(String content) {
     super(content);
-  }
-
-  @Override
-  public boolean isPunc() {
-    return true;
-  }
-
-  @Override
-  public boolean hasZ() {
-    return false;
   }
 
   @Override
@@ -28,8 +17,12 @@ public class Punctuation extends SentenceElt {
     return this.content;
   }
 
-  @Override
-  public boolean test(SentenceElt sentenceElt) {
+  public boolean isPunc() {
     return true;
+  }
+
+  @Override
+  public boolean hasZ() {
+    return false;
   }
 }

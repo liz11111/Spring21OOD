@@ -9,14 +9,7 @@ public interface Sentence {
    *
    * @return int number of punctuations in a sentence
    */
-  int numOfPuncs(Predicate<SentenceElt> pred);
-
-  /**
-   * numOfWordsWithZ counts and returns the number of words in a sentence with 'z'.
-   *
-   * @return int number of words with 'z'
-   */
-  int numOfWordsWithZ(Predicate<SentenceElt> pred);
+  int reduce(Predicate<SentenceElt> pred);
 
   /**
    * translate translates a Piglatin sentence to an English sentence.
