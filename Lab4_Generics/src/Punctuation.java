@@ -25,4 +25,19 @@ public class Punctuation extends SentenceElt {
   public boolean hasZ() {
     return false;
   }
+
+  @Override
+  public int getNumberOfWords() {
+    return 0;
+  }
+
+  @Override
+  public String longestWord() {
+    return "";
+  }
+
+  @Override
+  public SentenceElt clone() {
+    return new Punctuation(this.content);
+  }
 }

@@ -57,6 +57,39 @@ public class SentenceWrapper implements Sentence {
   }
 
   @Override
+  public int getNumberOfWords() {
+    int result = 0;
+    for (SentenceElt node : sentence) {
+      result += node.getNumberOfWords();
+    }
+    return result;
+  }
+
+  @Override
+  public String longestWord() {
+    String result = "";
+    for (SentenceElt node : sentence) {
+      result = node.longestWord().length() > result.length() ?
+              node.longestWord() : result;
+    }
+    return result;
+  }
+
+  @Override
+  public Sentence clone() {
+    List<SentenceElt> result = new ArrayList<>();
+    for (SentenceElt node : sentence) {
+      result.add(node.clone());
+    }
+    return new SentenceWrapper(result);
+  }
+
+  @Override
+  public Sentence merge(Sentence other) {
+    return new SentenceWrapper(this.toString() + " " + other.toString());
+  }
+
+  @Override
   public String toString() {
     String result = "";
     for (SentenceElt node : sentence) {

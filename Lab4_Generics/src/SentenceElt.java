@@ -35,4 +35,26 @@ public abstract class SentenceElt {
    * @return boolean if it has z
    */
   public abstract boolean hasZ();
+
+  /**
+   * getNumberOfWords returns the number of words in the node.
+   *
+   * @return int number of words
+   */
+  public abstract int getNumberOfWords();
+
+  /**
+   * longestWord returns the word in a word node.
+   * It returns an empty string in a punctuation node.
+   *
+   * @return String word
+   */
+  public abstract String longestWord();
+
+  /**
+   * clone returns a deep copy of SentenceElt object.
+   *
+   * @return SentenceElt clone of the node
+   */
+  public abstract SentenceElt clone();
 }

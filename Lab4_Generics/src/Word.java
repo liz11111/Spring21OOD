@@ -44,4 +44,19 @@ public class Word extends SentenceElt {
     return this.content.contains("Z") || this.content.contains("z");
   }
 
+  @Override
+  public int getNumberOfWords() {
+    return 1;
+  }
+
+  @Override
+  public String longestWord() {
+    return this.content;
+  }
+
+  @Override
+  public SentenceElt clone() {
+    return new Word(this.content);
+  }
+
 }
