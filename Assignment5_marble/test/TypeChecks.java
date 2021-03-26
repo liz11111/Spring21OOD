@@ -9,7 +9,6 @@ public class TypeChecks {
    * They are only here to ensure that your code compiles properly.
    */
 
-  /*
   public static void main(String[] args) {
     helper(new cs5004.marblesolitaire.model.MarbleSolitaireModelImpl());
     helper(new cs5004.marblesolitaire.model.MarbleSolitaireModelImpl(2, 2));
@@ -20,5 +19,4 @@ public class TypeChecks {
   private static void helper(cs5004.marblesolitaire.model.MarbleSolitaireModel model) {
     model.move(1, 3, 3, 3);
   }
-  */
 }
