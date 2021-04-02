@@ -23,4 +23,19 @@ public class Triangle extends AbstractShape {
     this.side1 = side1;
     this.side2 = side2;
   }
+
+  @Override
+  public String toString() {
+    StringBuilder sb = new StringBuilder();
+    sb.append("Name: " + this.name + "\n");
+    sb.append("Type: " + "square\n");
+    sb.append("corner: " + position.toString() + ", ");
+    sb.append("Side1: " + String.format("%.1f", side1) + ", ");
+    sb.append("Side2: " + String.format("%.1f", side2) + ", ");
+    sb.append("Angle: " + String.format("%.1f", angle) + ", ");
+    sb.append("Color: " + color.toString() + "\n");
+    sb.append("Appears: " + appearTime + "\n");
+    sb.append("Disappears: " + disappearTime + "\n\n");
+    return sb.toString();
+  }
 }

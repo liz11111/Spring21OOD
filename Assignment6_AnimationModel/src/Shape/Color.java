@@ -29,4 +29,9 @@ public class Color {
   public int getB() {
     return b;
   }
+
+  @Override
+  public String toString() {
+    return "(" + r + "," + g + "," + b + ")";
+  }
 }

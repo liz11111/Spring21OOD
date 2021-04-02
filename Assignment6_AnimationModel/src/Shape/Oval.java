@@ -12,4 +12,17 @@ public class Oval extends AbstractShape {
     this.radius = horizontalRadius;
     this.verticalRadius = verticalRadius;
   }
+
+  @Override
+  public String toString() {
+    StringBuilder sb = new StringBuilder();
+    sb.append("Name: " + this.name + "\n");
+    sb.append("Type: " + "oval\n");
+    sb.append("Center: " + position.toString() + ", ");
+    sb.append("Horizontal Radius: " + String.format("%.1f", this.radius) + ", " + "Vertical Radius: " + String.format("%.1f", this.verticalRadius) + ", ");
+    sb.append("Color: " + color.toString() + "\n");
+    sb.append("Appears: " + appearTime + "\n");
+    sb.append("Disappears: " + disappearTime + "\n\n");
+    return sb.toString();
+  }
 }

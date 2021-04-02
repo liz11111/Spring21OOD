@@ -19,4 +19,18 @@ public class Parallelogram extends AbstractShape {
     this.side1 = side1;
     this.side2 = side2;
   }
+
+  @Override
+  public String toString() {
+    StringBuilder sb = new StringBuilder();
+    sb.append("Name: " + this.name + "\n");
+    sb.append("Type: " + "parallelogram\n");
+    sb.append("corner: " + position.toString() + ", ");
+    sb.append("Width: " + String.format("%.1f", side1) + ", " + "Height: " + String.format("%.1f", side2) + ", ");
+    sb.append("Angle: " + String.format("%.1f", angle) + ", ");
+    sb.append("Color: " + color.toString() + "\n");
+    sb.append("Appears: " + appearTime + "\n");
+    sb.append("Disappears: " + disappearTime + "\n\n");
+    return sb.toString();
+  }
 }

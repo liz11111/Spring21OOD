@@ -8,11 +8,21 @@ public abstract class AbstractAnimation implements Animation {
   protected int endTime;
 
   public AbstractAnimation(Shape shape, int startTime, int endTime) throws IllegalArgumentException {
-    if (startTime < 0 || endTime <= startTime) {
+    if (startTime < 0 || endTime < startTime) {
       throw new IllegalArgumentException("Invalid time interval.");
     }
     this.shape = shape;
     this.startTime = startTime;
     this.endTime = endTime;
+  }
+
+  @Override
+  public int getStartTime() {
+    return this.startTime;
+  }
+
+  @Override
+  public int getEndTime() {
+    return this.endTime;
   }
 }

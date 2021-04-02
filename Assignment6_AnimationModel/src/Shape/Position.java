@@ -1,5 +1,7 @@
 package Shape;
 
+import java.text.DecimalFormat;
+
 public class Position {
   private double x;
   private double y;
@@ -15,5 +17,10 @@ public class Position {
 
   public double getY() {
     return y;
+  }
+
+  @Override
+  public String toString() {
+    return "(" + String.format("%.1f", this.x) + "," + String.format("%.1f", this.y) + ")";
   }
 }

@@ -22,4 +22,35 @@ public abstract class AbstractShape implements Shape {
     this.disappearTime = disappearTime;
   }
 
+  @Override
+  public Position getInitialPosition() {
+    return this.position;
+  }
+
+  @Override
+  public int getAppearTime() {
+    return this.appearTime;
+  }
+
+  @Override
+  public int getDisappearTime() {
+    return this.disappearTime;
+  }
+
+  @Override
+  public int hashCode() {
+    return name.hashCode();
+  }
+
+  @Override
+  public boolean equals(Object obj) {
+    if (this == obj) {
+      return true;
+    } else if (!(obj instanceof AbstractShape)) {
+      return false;
+    }
+
+    AbstractShape shapeObj = (AbstractShape) obj;
+    return this.name == ((AbstractShape) obj).name;
+  }
 }
