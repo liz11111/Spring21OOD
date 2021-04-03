@@ -40,7 +40,7 @@ public class Rectangle extends Parallelogram {
     return "Width: "
             + String.format("%.1f", this.side1) + ", "
             + "Height: "
-            + String.format("%.1f", this.side2) + ", ";
+            + String.format("%.1f", this.side2) + " ";
   }
 
   @Override

@@ -48,7 +48,7 @@ public class Oval extends AbstractShape {
   @Override
   public String getScale() {
     return "X radius: " + String.format("%.1f", this.radius)
-            + ", " + "Y Radius: " + String.format("%.1f", this.verticalRadius) + ", ";
+            + ", " + "Y Radius: " + String.format("%.1f", this.verticalRadius) + " ";
   }
 
   @Override

@@ -35,7 +35,7 @@ public class Square extends Rectangle {
 
   @Override
   public String getScale() {
-    return "Side: " + String.format("%.1f", this.side1) + ", ";
+    return "Side: " + String.format("%.1f", this.side1) + " ";
   }
 
   @Override

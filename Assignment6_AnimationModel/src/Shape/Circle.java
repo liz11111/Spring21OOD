@@ -34,7 +34,7 @@ public class Circle extends Oval {
 
   @Override
   public String getScale() {
-    return "Radius: " + String.format("%.1f", this.radius) + ", ";
+    return "Radius: " + String.format("%.1f", this.radius) + " ";
   }
 
   @Override

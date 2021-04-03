@@ -40,7 +40,7 @@ public class Rhombus extends Parallelogram {
     return "Angle: "
             + String.format("%.1f", this.angle) + ", "
             + "Side: "
-            + String.format("%.1f", this.side1) + ", ";
+            + String.format("%.1f", this.side1) + " ";
   }
 
   @Override

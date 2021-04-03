@@ -58,7 +58,7 @@ public class Triangle extends AbstractShape {
             + "Side1: "
             + String.format("%.1f", this.side1) + ", "
             + "Side2: "
-            + String.format("%.1f", this.side2) + ", ";
+            + String.format("%.1f", this.side2) + " ";
   }
 
   @Override
