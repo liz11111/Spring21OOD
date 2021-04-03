@@ -8,17 +8,16 @@ import Shape.Shape;
  * shape.
  */
 public class Display extends AbstractAnimation {
-  private Position initialPosition;
 
   /**
    * Constructor for Display.
    *
-   * @param shape     Shape shape to display
+   * @param fromShape Shape shape to display
+   * @param toShape   Shape shape to display
    * @param startTime int start time of display
    * @param endTime   int end time of display
    */
-  public Display(Shape shape, int startTime, int endTime) {
-    super(shape, startTime, endTime);
-    this.initialPosition = shape.getInitialPosition();
+  public Display(Shape fromShape, Shape toShape, int startTime, int endTime) {
+    super(fromShape, toShape, startTime, endTime);
   }
 }

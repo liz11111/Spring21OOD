@@ -7,30 +7,33 @@ import Shape.Shape;
  * class for all animations.
  */
 public abstract class AbstractAnimation implements Animation {
-  protected Shape shape;
+  protected Shape fromShape;
+  protected Shape toShape;
   protected int startTime;
   protected int endTime;
 
   /**
    * Constructor for animations.
    *
-   * @param shape     Shape the shape of this animation
+   * @param fromShape Shape from the shape of this animation
+   * @param toShape   Shape to the shape of this animation
    * @param startTime int start time of this animation
    * @param endTime   int end time of this animation
    * @throws IllegalArgumentException if start time and end time are invalid
    */
-  public AbstractAnimation(Shape shape, int startTime, int endTime) throws IllegalArgumentException {
+  public AbstractAnimation(Shape fromShape, Shape toShape, int startTime, int endTime) throws IllegalArgumentException {
     if (startTime < 0 || endTime < startTime) {
       throw new IllegalArgumentException("Invalid time interval.");
     }
-    this.shape = shape;
+    this.fromShape = fromShape;
+    this.toShape = toShape;
     this.startTime = startTime;
     this.endTime = endTime;
   }
 
   @Override
   public Shape getShape() {
-    return this.shape;
+    return this.toShape;
   }
 
   @Override

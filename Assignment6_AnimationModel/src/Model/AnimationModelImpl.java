@@ -30,8 +30,8 @@ public class AnimationModelImpl implements AnimationModel {
       throw new IllegalStateException("Shape already exists.");
     }
     List<Animation> animations = new ArrayList<>();
-    animations.add(new Display(shape, shape.getAppearTime(), shape.getAppearTime()));
-    animations.add(new Vanish(shape, shape.getDisappearTime(), shape.getDisappearTime()));
+    animations.add(new Display(shape, shape, shape.getAppearTime(), shape.getAppearTime()));
+    animations.add(new Vanish(shape, shape, shape.getDisappearTime(), shape.getDisappearTime()));
     animationHistory.put(shape, animations);
   }
 
@@ -154,8 +154,9 @@ public class AnimationModelImpl implements AnimationModel {
     for (int i = 1; i < size; i++) {
       if (animations.get(i).getStartTime() > startTime) {
         animations.add(i,
-                new Move(animations.get(i - 1).getShape().move(endPosition),
-                        endPosition, startTime, endTime));
+                new Move(animations.get(i - 1).getShape(),
+                        animations.get(i - 1).getShape().move(endPosition),
+                        startTime, endTime));
       }
     }
   }
@@ -173,8 +174,9 @@ public class AnimationModelImpl implements AnimationModel {
     for (int i = 1; i < size; i++) {
       if (animations.get(i).getStartTime() > startTime) {
         animations.add(i,
-                new Scale(animations.get(i - 1).getShape().scale(sideToScale, newLength),
-                        sideToScale, newLength, startTime, endTime));
+                new Scale(animations.get(i - 1).getShape(),
+                        animations.get(i - 1).getShape().scale(sideToScale, newLength),
+                        startTime, endTime));
       }
     }
   }
@@ -192,8 +194,9 @@ public class AnimationModelImpl implements AnimationModel {
     for (int i = 1; i < size; i++) {
       if (animations.get(i).getStartTime() > startTime) {
         animations.add(i,
-                new ChangeColor(animations.get(i - 1).getShape().changeColor(newColor),
-                        newColor, startTime, endTime));
+                new ChangeColor(animations.get(i - 1).getShape(),
+                        animations.get(i - 1).getShape().changeColor(newColor),
+                        startTime, endTime));
       }
     }
   }
