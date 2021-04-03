@@ -1,5 +1,8 @@
 package Shape;
 
+/**
+ * AbstractShape is an implementation of Shape interface.
+ */
 public abstract class AbstractShape implements Shape {
   protected String name;
   protected Position position;
@@ -7,8 +10,19 @@ public abstract class AbstractShape implements Shape {
   protected int appearTime;
   protected int disappearTime;
 
-  protected AbstractShape(String name, Position position, Color color, int appearTime, int disappearTime)
-          throws IllegalArgumentException{
+  /**
+   * Constructor for an abstract shape.
+   *
+   * @param name          String name of the shape
+   * @param position      Position position of the shape
+   * @param color         Color color of the shape
+   * @param appearTime    int appear time of the shape
+   * @param disappearTime int disappear time of the shape
+   * @throws IllegalArgumentException if name of time is invalid
+   */
+  protected AbstractShape(String name, Position position, Color color,
+                          int appearTime, int disappearTime)
+          throws IllegalArgumentException {
     if (name == null || name.length() == 0) {
       throw new IllegalArgumentException("Name cannot be null or empty.");
     } else if (appearTime < 0 || disappearTime <= appearTime) {
@@ -35,6 +49,16 @@ public abstract class AbstractShape implements Shape {
   @Override
   public int getDisappearTime() {
     return this.disappearTime;
+  }
+
+  @Override
+  public String getName() {
+    return this.name;
+  }
+
+  @Override
+  public Color getColor() {
+    return this.color;
   }
 
   @Override

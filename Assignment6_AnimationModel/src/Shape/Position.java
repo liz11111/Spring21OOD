@@ -1,22 +1,21 @@
 package Shape;
 
-import java.text.DecimalFormat;
-
+/**
+ * Position is a helper class that represents the position of a shape.
+ */
 public class Position {
   private double x;
   private double y;
 
+  /**
+   * Constructor for Position.
+   *
+   * @param x double x
+   * @param y double y
+   */
   public Position(double x, double y) {
     this.x = x;
     this.y = y;
-  }
-
-  public double getX() {
-    return x;
-  }
-
-  public double getY() {
-    return y;
   }
 
   @Override
