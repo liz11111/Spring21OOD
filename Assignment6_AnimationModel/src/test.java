@@ -1,6 +1,5 @@
 import Model.AnimationModel;
 import Model.AnimationModelImpl;
-import Shape.Circle;
 import Shape.Color;
 import Shape.Oval;
 import Shape.Position;

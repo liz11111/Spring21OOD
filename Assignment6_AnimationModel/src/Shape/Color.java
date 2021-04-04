@@ -4,9 +4,9 @@ package Shape;
  * Color is a helper class that represents the RGB data for a color.
  */
 public class Color {
-  private int r;
-  private int g;
-  private int b;
+  private final int r;
+  private final int g;
+  private final int b;
 
   /**
    * Constructor for Color.
@@ -37,32 +37,6 @@ public class Color {
     return r < 0 || r > 255 || g < 0 || g > 255 || b < 0 || b > 255;
   }
 
-  /**
-   * getter for R.
-   *
-   * @return int r
-   */
-  public int getR() {
-    return r;
-  }
-
-  /**
-   * getter for G.
-   *
-   * @return int g
-   */
-  public int getG() {
-    return g;
-  }
-
-  /**
-   * getter for B.
-   *
-   * @return int b
-   */
-  public int getB() {
-    return b;
-  }
 
   @Override
   public String toString() {

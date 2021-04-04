@@ -1,6 +1,5 @@
 package Animation;
 
-import Shape.Position;
 import Shape.Shape;
 
 /**

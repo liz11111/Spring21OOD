@@ -21,7 +21,7 @@ public class Parallelogram extends AbstractShape {
    * @param angle         double angle
    * @param side1         double bottom side length
    * @param side2         double left side length
-   * @throws IllegalArgumentException
+   * @throws IllegalArgumentException if inputs are invalid
    */
   public Parallelogram(String name, Position position, Color color,
                        int appearTime, int disappearTime, double angle, double side1, double side2)

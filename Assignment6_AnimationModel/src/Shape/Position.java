@@ -4,8 +4,8 @@ package Shape;
  * Position is a helper class that represents the position of a shape.
  */
 public class Position {
-  private double x;
-  private double y;
+  private final double x;
+  private final double y;
 
   /**
    * Constructor for Position.
