@@ -157,6 +157,7 @@ public class AnimationModelImpl implements AnimationModel {
                 new Move(animations.get(i - 1).getShape(),
                         animations.get(i - 1).getShape().move(endPosition),
                         startTime, endTime));
+        break;
       }
     }
   }
@@ -177,6 +178,7 @@ public class AnimationModelImpl implements AnimationModel {
                 new Scale(animations.get(i - 1).getShape(),
                         animations.get(i - 1).getShape().scale(sideToScale, newLength),
                         startTime, endTime));
+        break;
       }
     }
   }
@@ -197,6 +199,7 @@ public class AnimationModelImpl implements AnimationModel {
                 new ChangeColor(animations.get(i - 1).getShape(),
                         animations.get(i - 1).getShape().changeColor(newColor),
                         startTime, endTime));
+        break;
       }
     }
   }
