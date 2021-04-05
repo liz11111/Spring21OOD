@@ -1,5 +1,13 @@
 The Shape interface specifies all the functionalities a shape has. 
-All the concrete classes that implement the Shape interface have a name, original position of the center/corner, the original color and appear time along with disappear time. 
+All the concrete classes that implement the Shape interface have a name, current position of the center/corner, the current color and appear time along with disappear time. 
+Shapes supported for now includes:
+- Oval, Circle: Position is specified by the center coordinates and shape is specified by the radii
+- Triangle: Position is specified by the bottom left vertex coordinates and shape is specified by the bottom left angle and two neighboring sides, with the bottom one being side1
+- Quadrilaterals: Position is specified by the bottom left vertex coordinates and shape is generally specified by bottom left angle and two neighboring sides, with the bottom one being side1
+	- Parallelogram: Angle and two sides
+	- Rhombus: Angle and one side
+	- Rectangle: two sides
+	- Square: one side
 
 Animation Interface represents a specific transformation of a shape. 
 ChangeColor class, Display class, Move class, Scale class and Vanish Class implements the functionalities specified in the Animation interface, recording the time interval the transformation being made and also properties of the corresponding shape both before and after the transformation. 
