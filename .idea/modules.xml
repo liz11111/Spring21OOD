@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/Assignment1_Vector/Assignment1_Vector.iml" filepath="$PROJECT_DIR$/Assignment1_Vector/Assignment1_Vector.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Assignment2_ChessPieces/Assignment2_ChessPieces.iml" filepath="$PROJECT_DIR$/Assignment2_ChessPieces/Assignment2_ChessPieces.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Assignment3_Polynomials/Assignment3_Polynomials.iml" filepath="$PROJECT_DIR$/Assignment3_Polynomials/Assignment3_Polynomials.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Assignment4_Questions/Assignment4_Questions.iml" filepath="$PROJECT_DIR$/Assignment4_Questions/Assignment4_Questions.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Assignment5_marble/Assignment5_marble.iml" filepath="$PROJECT_DIR$/Assignment5_marble/Assignment5_marble.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Assignment6_AnimationModel/Assignment6_AnimationModel.iml" filepath="$PROJECT_DIR$/Assignment6_AnimationModel/Assignment6_AnimationModel.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Lab0/Lab0.iml" filepath="$PROJECT_DIR$/Lab0/Lab0.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Lab1_Employee/Lab1_Employee.iml" filepath="$PROJECT_DIR$/Lab1_Employee/Lab1_Employee.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Lab2_BankAccount/Lab2_BankAccount.iml" filepath="$PROJECT_DIR$/Lab2_BankAccount/Lab2_BankAccount.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Lab3_Sentence/Lab3_Sentence.iml" filepath="$PROJECT_DIR$/Lab3_Sentence/Lab3_Sentence.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Lab4_Generics/Lab4_Generics.iml" filepath="$PROJECT_DIR$/Lab4_Generics/Lab4_Generics.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Lab5_TicTacToe/Lab5_TicTacToe.iml" filepath="$PROJECT_DIR$/Lab5_TicTacToe/Lab5_TicTacToe.iml" />
+      <module fileurl="file://$PROJECT_DIR$/Lab6_Controller/Lab6_Controller.iml" filepath="$PROJECT_DIR$/Lab6_Controller/Lab6_Controller.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/Spring21OOD.iml" filepath="$PROJECT_DIR$/.idea/Spring21OOD.iml" />
+      <module fileurl="file://$PROJECT_DIR$/midterm/midterm.iml" filepath="$PROJECT_DIR$/midterm/midterm.iml" />
+    </modules>
+  </component>
+</project>
