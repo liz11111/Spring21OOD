@@ -9,6 +9,7 @@ import Shape.Color;
  * supports all functionalities of an animation model in the MVC pattern.
  */
 public interface AnimationModel {
+
   /**
    * addShape adds a shape to the model.
    *

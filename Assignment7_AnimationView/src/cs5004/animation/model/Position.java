@@ -1,4 +1,4 @@
-package Shape;
+package cs5004.animation.model;
 
 /**
  * Position is a helper class that represents the position of a shape.
@@ -17,6 +17,14 @@ public class Position {
   public Position(double x, double y) {
     this.x = x;
     this.y = y;
+  }
+
+  public double getX() {
+    return this.x;
+  }
+
+  public double getY() {
+    return this.y;
   }
 
   @Override

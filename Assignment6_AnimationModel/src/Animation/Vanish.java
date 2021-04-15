@@ -6,6 +6,7 @@ import Shape.Shape;
  * Vanish is an implementation of Animation and support additional feature of vanishing a shape.
  */
 public class Vanish extends AbstractAnimation {
+
   /**
    * Constructor for Vanish.
    *

@@ -5,6 +5,7 @@ package Shape;
  * and Y radius.
  */
 public class Oval extends AbstractShape {
+
   protected double radius;
   private double verticalRadius;
 
@@ -21,11 +22,11 @@ public class Oval extends AbstractShape {
    * @throws IllegalArgumentException if arguments are invalid
    */
   public Oval(String name, Position position, Color color,
-              int appearTime, int disappearTime, double horizontalRadius, double verticalRadius)
-          throws IllegalArgumentException {
+      int appearTime, int disappearTime, double horizontalRadius, double verticalRadius)
+      throws IllegalArgumentException {
     super(name, position, color, appearTime, disappearTime);
     if (horizontalRadius < 0 || verticalRadius < 0) {
-      throw new IllegalArgumentException("Radii cannot be negative.");
+      throw new IllegalArgumentException("Radius cannot be negative.");
     }
     this.radius = horizontalRadius;
     this.verticalRadius = verticalRadius;
@@ -38,7 +39,7 @@ public class Oval extends AbstractShape {
     sb.append("Type: " + "oval\n");
     sb.append("Center: " + position.toString() + ", ");
     sb.append("Horizontal Radius: " + String.format("%.1f", this.radius)
-            + ", " + "Vertical Radius: " + String.format("%.1f", this.verticalRadius) + ", ");
+        + ", " + "Vertical Radius: " + String.format("%.1f", this.verticalRadius) + ", ");
     sb.append("Color: " + color.toString() + "\n");
     sb.append("Appears at t=" + appearTime + "\n");
     sb.append("Disappears at t=" + disappearTime + "\n\n");
@@ -48,26 +49,26 @@ public class Oval extends AbstractShape {
   @Override
   public String getScale() {
     return "X radius: " + String.format("%.1f", this.radius)
-            + ", " + "Y Radius: " + String.format("%.1f", this.verticalRadius) + " ";
+        + ", " + "Y Radius: " + String.format("%.1f", this.verticalRadius) + " ";
   }
 
   @Override
   public Oval move(Position newPosition) {
     return new Oval(this.name, newPosition, this.color,
-            this.appearTime, this.disappearTime, this.radius, this.verticalRadius);
+        this.appearTime, this.disappearTime, this.radius, this.verticalRadius);
   }
 
   @Override
   public Oval changeColor(Color newColor) {
     return new Oval(this.name, this.position, newColor,
-            this.appearTime, this.disappearTime, this.radius, this.verticalRadius);
+        this.appearTime, this.disappearTime, this.radius, this.verticalRadius);
   }
 
   @Override
   public Oval scale(int sideToScale, double newLength) {
     return new Oval(this.name, this.position, this.color,
-            this.appearTime, this.disappearTime,
-            sideToScale == 1 ? newLength : this.radius,
-            sideToScale == 2 ? newLength : this.verticalRadius);
+        this.appearTime, this.disappearTime,
+        sideToScale == 1 ? newLength : this.radius,
+        sideToScale == 2 ? newLength : this.verticalRadius);
   }
 }

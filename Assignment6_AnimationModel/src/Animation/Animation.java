@@ -6,6 +6,7 @@ import Shape.Shape;
  * Animation interface specifies all contracts an animation should support.
  */
 public interface Animation {
+
   /**
    * getShape returns the shape of this animation.
    *

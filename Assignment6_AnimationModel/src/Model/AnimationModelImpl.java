@@ -16,6 +16,7 @@ import Shape.Color;
  * AnimationModelImpl implements all functionalities of AnimationModel interface.
  */
 public class AnimationModelImpl implements AnimationModel {
+
   Map<Shape, List<Animation>> animationHistory;
 
   /**
@@ -55,9 +56,9 @@ public class AnimationModelImpl implements AnimationModel {
     List<Animation> animations = animationHistory.get(shape);
     // check if move operation is within lifetime of this shape
     if (startTime < animations.get(0).getEndTime()
-            || startTime > animations.get(animations.size() - 1).getStartTime()
-            || endTime < animations.get(0).getEndTime()
-            || endTime > animations.get(animations.size() - 1).getStartTime()) {
+        || startTime > animations.get(animations.size() - 1).getStartTime()
+        || endTime < animations.get(0).getEndTime()
+        || endTime > animations.get(animations.size() - 1).getStartTime()) {
       return false;
     }
     return true;
@@ -75,7 +76,7 @@ public class AnimationModelImpl implements AnimationModel {
    * @throws IllegalArgumentException if invalid operation type is specified
    */
   private boolean hasConflict(Shape shape, int startTime, int endTime, String animationType)
-          throws IllegalArgumentException {
+      throws IllegalArgumentException {
     List<Animation> animations = animationHistory.get(shape);
     // check if a given operation has conflict with existing animations
     switch (animationType) {
@@ -131,7 +132,7 @@ public class AnimationModelImpl implements AnimationModel {
    * @throws IllegalArgumentException if shape or time is invalid
    */
   private void checkAnimation(Shape shape, int startTime, int endTime)
-          throws IllegalArgumentException {
+      throws IllegalArgumentException {
     if (!animationHistory.containsKey(shape)) {
       throw new IllegalArgumentException("No such shape");
     } else if (startTime >= endTime) {
@@ -143,7 +144,7 @@ public class AnimationModelImpl implements AnimationModel {
 
   @Override
   public void move(Shape shape, Position endPosition, int startTime, int endTime)
-          throws IllegalArgumentException {
+      throws IllegalArgumentException {
     checkAnimation(shape, startTime, endTime);
     if (hasConflict(shape, startTime, endTime, "Move")) {
       throw new IllegalArgumentException("Has conflict with existing animations.");
@@ -154,9 +155,9 @@ public class AnimationModelImpl implements AnimationModel {
     for (int i = 1; i < size; i++) {
       if (animations.get(i).getStartTime() > startTime) {
         animations.add(i,
-                new Move(animations.get(i - 1).getShape(),
-                        animations.get(i - 1).getShape().move(endPosition),
-                        startTime, endTime));
+            new Move(animations.get(i - 1).getShape(),
+                animations.get(i - 1).getShape().move(endPosition),
+                startTime, endTime));
         break;
       }
     }
@@ -164,7 +165,7 @@ public class AnimationModelImpl implements AnimationModel {
 
   @Override
   public void scale(Shape shape, int sideToScale, double newLength, int startTime, int endTime)
-          throws IllegalArgumentException {
+      throws IllegalArgumentException {
     checkAnimation(shape, startTime, endTime);
     if (hasConflict(shape, startTime, endTime, "Scale")) {
       throw new IllegalArgumentException("Has conflict with existing animations.");
@@ -175,9 +176,9 @@ public class AnimationModelImpl implements AnimationModel {
     for (int i = 1; i < size; i++) {
       if (animations.get(i).getStartTime() > startTime) {
         animations.add(i,
-                new Scale(animations.get(i - 1).getShape(),
-                        animations.get(i - 1).getShape().scale(sideToScale, newLength),
-                        startTime, endTime));
+            new Scale(animations.get(i - 1).getShape(),
+                animations.get(i - 1).getShape().scale(sideToScale, newLength),
+                startTime, endTime));
         break;
       }
     }
@@ -185,7 +186,7 @@ public class AnimationModelImpl implements AnimationModel {
 
   @Override
   public void changeColor(Shape shape, Color newColor, int startTime, int endTime)
-          throws IllegalArgumentException {
+      throws IllegalArgumentException {
     checkAnimation(shape, startTime, endTime);
     if (hasConflict(shape, startTime, endTime, "Change Color")) {
       throw new IllegalArgumentException("Has conflict with existing animations.");
@@ -196,9 +197,9 @@ public class AnimationModelImpl implements AnimationModel {
     for (int i = 1; i < size; i++) {
       if (animations.get(i).getStartTime() > startTime) {
         animations.add(i,
-                new ChangeColor(animations.get(i - 1).getShape(),
-                        animations.get(i - 1).getShape().changeColor(newColor),
-                        startTime, endTime));
+            new ChangeColor(animations.get(i - 1).getShape(),
+                animations.get(i - 1).getShape().changeColor(newColor),
+                startTime, endTime));
         break;
       }
     }

@@ -7,6 +7,7 @@ package Shape;
  * the one in the bottom.
  */
 public class Triangle extends AbstractShape {
+
   private double angle;
   private double side1;
   private double side2;
@@ -25,8 +26,8 @@ public class Triangle extends AbstractShape {
    * @throws IllegalArgumentException if inputs are invalid
    */
   public Triangle(String name, Position position, Color color,
-                  int appearTime, int disappearTime, double angle, double side1, double side2)
-          throws IllegalArgumentException {
+      int appearTime, int disappearTime, double angle, double side1, double side2)
+      throws IllegalArgumentException {
     super(name, position, color, appearTime, disappearTime);
     if (angle < 0 || angle > 180 || side1 < 0 || side2 < 0) {
       throw new IllegalArgumentException("Invalids triangle specs.");
@@ -54,30 +55,30 @@ public class Triangle extends AbstractShape {
   @Override
   public String getScale() {
     return "Angle: "
-            + String.format("%.1f", this.angle) + ", "
-            + "Side1: "
-            + String.format("%.1f", this.side1) + ", "
-            + "Side2: "
-            + String.format("%.1f", this.side2) + " ";
+        + String.format("%.1f", this.angle) + ", "
+        + "Side1: "
+        + String.format("%.1f", this.side1) + ", "
+        + "Side2: "
+        + String.format("%.1f", this.side2) + " ";
   }
 
   @Override
   public Triangle move(Position newPosition) {
     return new Triangle(this.name, newPosition, this.color,
-            this.appearTime, this.disappearTime, this.angle, this.side1, this.side2);
+        this.appearTime, this.disappearTime, this.angle, this.side1, this.side2);
   }
 
   @Override
   public Triangle changeColor(Color newColor) {
     return new Triangle(this.name, this.position, newColor,
-            this.appearTime, this.disappearTime, this.angle, this.side1, this.side2);
+        this.appearTime, this.disappearTime, this.angle, this.side1, this.side2);
   }
 
   @Override
   public Triangle scale(int sideToScale, double newLength) {
     return new Triangle(this.name, this.position, this.color,
-            this.appearTime, this.disappearTime, this.angle,
-            sideToScale == 1 ? newLength : this.side1,
-            sideToScale == 2 ? newLength : this.side2);
+        this.appearTime, this.disappearTime, this.angle,
+        sideToScale == 1 ? newLength : this.side1,
+        sideToScale == 2 ? newLength : this.side2);
   }
 }

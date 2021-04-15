@@ -23,12 +23,12 @@ public class Move extends AbstractAnimation {
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("Shape ")
-            .append(this.fromShape.getName() + " ")
-            .append("moves from ")
-            .append(this.fromShape.getInitialPosition().toString() + " ")
-            .append("to ")
-            .append(this.toShape.getInitialPosition().toString() + " ")
-            .append(String.format("from t=%d to t=%d\n", this.startTime, this.endTime));
+        .append(this.fromShape.getName() + " ")
+        .append("moves from ")
+        .append(this.fromShape.getInitialPosition().toString() + " ")
+        .append("to ")
+        .append(this.toShape.getInitialPosition().toString() + " ")
+        .append(String.format("from t=%d to t=%d\n", this.startTime, this.endTime));
     return sb.toString();
   }
 }

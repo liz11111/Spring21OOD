@@ -23,12 +23,12 @@ public class ChangeColor extends AbstractAnimation {
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("Shape ")
-            .append(this.fromShape.getName() + " ")
-            .append("changes color from ")
-            .append(this.fromShape.getColor().toString() + " ")
-            .append("to ")
-            .append(this.toShape.getColor().toString() + " ")
-            .append(String.format("from t=%d to t=%d\n", this.startTime, this.endTime));
+        .append(this.fromShape.getName() + " ")
+        .append("changes color from ")
+        .append(this.fromShape.getColor().toString() + " ")
+        .append("to ")
+        .append(this.toShape.getColor().toString() + " ")
+        .append(String.format("from t=%d to t=%d\n", this.startTime, this.endTime));
     return sb.toString();
   }
 }

@@ -5,6 +5,7 @@ package Shape;
  * angle at bottom left corner and a side length.
  */
 public class Rhombus extends Parallelogram {
+
   /**
    * Constructor for Rhombus.
    *
@@ -17,7 +18,7 @@ public class Rhombus extends Parallelogram {
    * @param side          double side length
    */
   public Rhombus(String name, Position position, Color color,
-                 int appearTime, int disappearTime, double angle, double side) {
+      int appearTime, int disappearTime, double angle, double side) {
     super(name, position, color, appearTime, disappearTime, angle, side, side);
   }
 
@@ -38,26 +39,26 @@ public class Rhombus extends Parallelogram {
   @Override
   public String getScale() {
     return "Angle: "
-            + String.format("%.1f", this.angle) + ", "
-            + "Side: "
-            + String.format("%.1f", this.side1) + " ";
+        + String.format("%.1f", this.angle) + ", "
+        + "Side: "
+        + String.format("%.1f", this.side1) + " ";
   }
 
   @Override
   public Rhombus move(Position newPosition) {
     return new Rhombus(this.name, newPosition, this.color,
-            this.appearTime, this.disappearTime, this.angle, this.side1);
+        this.appearTime, this.disappearTime, this.angle, this.side1);
   }
 
   @Override
   public Rhombus changeColor(Color newColor) {
     return new Rhombus(this.name, this.position, newColor,
-            this.appearTime, this.disappearTime, this.angle, this.side1);
+        this.appearTime, this.disappearTime, this.angle, this.side1);
   }
 
   @Override
   public Rhombus scale(int sideToScale, double newLength) {
     return new Rhombus(this.name, this.position, this.color,
-            this.appearTime, this.disappearTime, this.angle, newLength);
+        this.appearTime, this.disappearTime, this.angle, newLength);
   }
 }

@@ -7,6 +7,7 @@ import Shape.Shape;
  * class for all animations.
  */
 public abstract class AbstractAnimation implements Animation {
+
   protected Shape fromShape;
   protected Shape toShape;
   protected int startTime;
@@ -21,7 +22,8 @@ public abstract class AbstractAnimation implements Animation {
    * @param endTime   int end time of this animation
    * @throws IllegalArgumentException if start time and end time are invalid
    */
-  public AbstractAnimation(Shape fromShape, Shape toShape, int startTime, int endTime) throws IllegalArgumentException {
+  public AbstractAnimation(Shape fromShape, Shape toShape, int startTime, int endTime)
+      throws IllegalArgumentException {
     if (startTime < 0 || endTime < startTime) {
       throw new IllegalArgumentException("Invalid time interval.");
     }

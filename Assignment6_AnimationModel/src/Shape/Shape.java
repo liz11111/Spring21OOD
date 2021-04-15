@@ -4,6 +4,7 @@ package Shape;
  * Shape interface specifies all contracts a shape should adhere to.
  */
 public interface Shape {
+
   /**
    * getInitialPosition returns the initial position of the shape.
    *

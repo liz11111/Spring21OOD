@@ -4,6 +4,7 @@ package Shape;
  * AbstractShape is an implementation of Shape interface.
  */
 public abstract class AbstractShape implements Shape {
+
   protected String name;
   protected Position position;
   protected Color color;
@@ -21,8 +22,8 @@ public abstract class AbstractShape implements Shape {
    * @throws IllegalArgumentException if name of time is invalid
    */
   protected AbstractShape(String name, Position position, Color color,
-                          int appearTime, int disappearTime)
-          throws IllegalArgumentException {
+      int appearTime, int disappearTime)
+      throws IllegalArgumentException {
     if (name == null || name.length() == 0) {
       throw new IllegalArgumentException("Name cannot be null or empty.");
     } else if (appearTime < 0 || disappearTime <= appearTime) {

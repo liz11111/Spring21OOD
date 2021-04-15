@@ -4,6 +4,7 @@ package Shape;
  * Circle is an implementation of Shape that represents a circle.
  */
 public class Circle extends Oval {
+
   /**
    * Constructor for circle.
    *
@@ -15,7 +16,7 @@ public class Circle extends Oval {
    * @param radius        double radius of the circle
    */
   public Circle(String name, Position position, Color color, int appearTime,
-                int disappearTime, double radius) {
+      int disappearTime, double radius) {
     super(name, position, color, appearTime, disappearTime, radius, radius);
   }
 
@@ -40,18 +41,18 @@ public class Circle extends Oval {
   @Override
   public Circle move(Position newPosition) {
     return new Circle(this.name, newPosition, this.color,
-            this.appearTime, this.disappearTime, this.radius);
+        this.appearTime, this.disappearTime, this.radius);
   }
 
   @Override
   public Circle changeColor(Color newColor) {
     return new Circle(this.name, this.position, newColor,
-            this.appearTime, this.disappearTime, this.radius);
+        this.appearTime, this.disappearTime, this.radius);
   }
 
   @Override
   public Circle scale(int sideToScale, double newLength) {
     return new Circle(this.name, this.position, this.color,
-            this.appearTime, this.disappearTime, newLength);
+        this.appearTime, this.disappearTime, newLength);
   }
 }

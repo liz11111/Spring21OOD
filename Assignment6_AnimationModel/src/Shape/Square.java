@@ -5,6 +5,7 @@ package Shape;
  * radius.
  */
 public class Square extends Rectangle {
+
   /**
    * Constructor for Square.
    *
@@ -16,7 +17,7 @@ public class Square extends Rectangle {
    * @param side          double side length
    */
   public Square(String name, Position position, Color color,
-                int appearTime, int disappearTime, double side) {
+      int appearTime, int disappearTime, double side) {
     super(name, position, color, appearTime, disappearTime, side, side);
   }
 
@@ -41,18 +42,18 @@ public class Square extends Rectangle {
   @Override
   public Square move(Position newPosition) {
     return new Square(this.name, newPosition, this.color,
-            this.appearTime, this.disappearTime, this.side1);
+        this.appearTime, this.disappearTime, this.side1);
   }
 
   @Override
   public Square changeColor(Color newColor) {
     return new Square(this.name, this.position, newColor,
-            this.appearTime, this.disappearTime, this.side1);
+        this.appearTime, this.disappearTime, this.side1);
   }
 
   @Override
   public Square scale(int sideToScale, double newLength) {
     return new Square(this.name, this.position, this.color,
-            this.appearTime, this.disappearTime, newLength);
+        this.appearTime, this.disappearTime, newLength);
   }
 }

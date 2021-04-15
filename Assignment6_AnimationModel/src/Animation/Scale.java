@@ -23,12 +23,12 @@ public class Scale extends AbstractAnimation {
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("Shape ")
-            .append(this.fromShape.getName() + " ")
-            .append("scales from ")
-            .append(this.fromShape.getScale())
-            .append("to ")
-            .append(this.toShape.getScale())
-            .append(String.format("from t=%d to t=%d\n", startTime, endTime));
+        .append(this.fromShape.getName() + " ")
+        .append("scales from ")
+        .append(this.fromShape.getScale())
+        .append("to ")
+        .append(this.toShape.getScale())
+        .append(String.format("from t=%d to t=%d\n", startTime, endTime));
     return sb.toString();
   }
 }

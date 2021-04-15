@@ -1,13 +1,13 @@
-package Shape;
+package cs5004.animation.model;
 
 /**
  * Color is a helper class that represents the RGB data for a color.
  */
 public class Color {
 
-  private final int r;
-  private final int g;
-  private final int b;
+  private final double r;
+  private final double g;
+  private final double b;
 
   /**
    * Constructor for Color.
@@ -17,7 +17,7 @@ public class Color {
    * @param b int B
    * @throws IllegalArgumentException if RGB values are invalid
    */
-  public Color(int r, int g, int b) throws IllegalArgumentException {
+  public Color(double r, double g, double b) throws IllegalArgumentException {
     if (outOfBound(r, g, b)) {
       throw new IllegalArgumentException("RGB values must be between 0 and 255.");
     }
@@ -34,13 +34,25 @@ public class Color {
    * @param b int B
    * @return boolean whether the values are valid
    */
-  private boolean outOfBound(int r, int g, int b) {
+  private boolean outOfBound(double r, double g, double b) {
     return r < 0 || r > 255 || g < 0 || g > 255 || b < 0 || b > 255;
   }
 
+  public double getR() {
+    return this.r;
+  }
+
+  public double getG() {
+    return this.g;
+  }
+
+  public double getB() {
+    return this.b;
+  }
 
   @Override
   public String toString() {
     return "(" + r + "," + g + "," + b + ")";
   }
+
 }
