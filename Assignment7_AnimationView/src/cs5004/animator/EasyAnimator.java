@@ -15,7 +15,7 @@ public class EasyAnimator {
     //String fileName = "smalldemo.txt";
     String fileName = "toh-3.txt";
     //String fileName = "toh-8.txt";
-    String filePath = "C:\\Users\\heyif\\OneDrive\\Desktop\\NEU-2021Spring\\cs5004\\HW7\\" + fileName;
+    String filePath = "..." + fileName;
     Readable inFile = new FileReader(filePath);
     AnimationModel model = AnimationReader.parseFile(inFile, new AnimationModelImpl.Builder());
 
