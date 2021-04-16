@@ -24,7 +24,7 @@ public abstract class AbstractShape implements Shape {
           throws IllegalArgumentException {
     if (name == null || name.length() == 0) {
       throw new IllegalArgumentException("Name cannot be null or empty.");
-    } else if (appearTime < 0 || disappearTime <= appearTime) {
+    } else if (appearTime < 0 || disappearTime < appearTime) {
       throw new IllegalArgumentException("Invalid appear and disappear times.");
     }
 
@@ -32,7 +32,7 @@ public abstract class AbstractShape implements Shape {
     this.position = position;
     this.color = color;
     this.appearTime = appearTime;
-    this.disappearTime = disappearTime;
+    this.disappearTime = Integer.MAX_VALUE;
   }
 
   @Override
@@ -75,5 +75,15 @@ public abstract class AbstractShape implements Shape {
 
     AbstractShape shapeObj = (AbstractShape) obj;
     return this.name == ((AbstractShape) obj).name;
+  }
+
+  @Override
+  public void setColor(Color newColor) {
+    this.color = newColor;
+  }
+
+  @Override
+  public void setPosition(Position newPosition) {
+    this.position = newPosition;
   }
 }

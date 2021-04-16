@@ -80,4 +80,16 @@ public class Oval extends AbstractShape {
             sideToScale == 1 ? newLength : this.radius,
             sideToScale == 2 ? newLength : this.verticalRadius);
   }
+
+  @Override
+  public void setScale(double[] newScale) {
+    this.radius = newScale[0];
+    this.verticalRadius = newScale[1];
+  }
+
+  @Override
+  public Oval getCopy() {
+    return new Oval(this.name, this.position, this.color, this.appearTime, this.disappearTime,
+        this.radius, this.verticalRadius);
+  }
 }
