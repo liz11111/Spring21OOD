@@ -1,6 +1,8 @@
 package cs5004.animator.Animation;
 
 
+import cs5004.animator.Shape.Color;
+import cs5004.animator.Shape.Position;
 import cs5004.animator.Shape.Shape;
 
 /**
@@ -26,10 +28,29 @@ public class Move extends AbstractAnimation {
     sb.append("Shape ")
             .append(this.fromShape.getName() + " ")
             .append("moves from ")
-            .append(this.fromShape.getInitialPosition().toString() + " ")
+            .append(this.fromShape.getPosition().toString() + " ")
             .append("to ")
-            .append(this.toShape.getInitialPosition().toString() + " ")
+            .append(this.toShape.getPosition().toString() + " ")
             .append(String.format("from t=%d to t=%d\n", this.startTime, this.endTime));
     return sb.toString();
+  }
+
+  @Override
+  public Position getPositionAtTick(int t) {
+    double x = this.fromShape.getPosition().getX() * (this.endTime - t) / (this.endTime - this.startTime) +
+        this.toShape.getPosition().getX() * (t - this.startTime) / (this.endTime - this.startTime);
+    double y = this.fromShape.getPosition().getY() * (this.endTime - t) / (this.endTime - this.startTime) +
+        this.toShape.getPosition().getY() * (t - this.startTime) / (this.endTime - this.startTime);
+    return new Position(x, y);
+  }
+
+  @Override
+  public Color getColorAtTick(int t) {
+    return null;
+  }
+
+  @Override
+  public double[] getScaleAtTick(int t) {
+    return new double[0];
   }
 }

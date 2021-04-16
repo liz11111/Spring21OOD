@@ -1,6 +1,8 @@
 package cs5004.animator.Animation;
 
 
+import cs5004.animator.Shape.Color;
+import cs5004.animator.Shape.Position;
 import cs5004.animator.Shape.Shape;
 
 /**
@@ -31,5 +33,26 @@ public class Scale extends AbstractAnimation {
             .append(this.toShape.getScale())
             .append(String.format("from t=%d to t=%d\n", startTime, endTime));
     return sb.toString();
+  }
+
+  @Override
+  public Position getPositionAtTick(int t) {
+    return null;
+  }
+
+  @Override
+  public Color getColorAtTick(int t) {
+    return null;
+  }
+
+  @Override
+  public double[] getScaleAtTick(int t) {
+    double width = this.fromShape.getSize()[0] * (this.endTime - t) / (this.endTime - this.startTime) +
+        this.toShape.getSize()[0] * (t - this.startTime) / (this.endTime - this.startTime);
+    double height = this.fromShape.getSize()[1] * (this.endTime - t) / (this.endTime - this.startTime) +
+        this.toShape.getSize()[1] * (t - this.startTime) / (this.endTime - this.startTime);
+
+    return new double[]{width, height};
+
   }
 }

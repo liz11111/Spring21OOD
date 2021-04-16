@@ -61,6 +61,11 @@ public class Triangle extends AbstractShape {
   }
 
   @Override
+  public double[] getSize() {
+    return new double[]{this.side1, this.side2, this.angle};
+  }
+
+  @Override
   public Triangle move(Position newPosition) {
     return new Triangle(this.name, newPosition, this.color,
             this.appearTime, this.disappearTime, this.angle, this.side1, this.side2);
@@ -79,4 +84,10 @@ public class Triangle extends AbstractShape {
             sideToScale == 1 ? newLength : this.side1,
             sideToScale == 2 ? newLength : this.side2);
   }
+
+  @Override
+  public String getShapeTypeName() {
+    return "triangle";
+  }
+
 }

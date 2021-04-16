@@ -46,9 +46,19 @@ public class Oval extends AbstractShape {
   }
 
   @Override
+  public String getShapeTypeName() {
+    return "ellipse";
+  }
+
+  @Override
   public String getScale() {
     return "X radius: " + String.format("%.1f", this.radius)
             + ", " + "Y Radius: " + String.format("%.1f", this.verticalRadius) + " ";
+  }
+
+  @Override
+  public double[] getSize() {
+    return new double[]{this.radius, this.verticalRadius};
   }
 
   @Override

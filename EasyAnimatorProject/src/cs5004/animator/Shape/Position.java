@@ -22,4 +22,12 @@ public class Position {
   public String toString() {
     return "(" + String.format("%.1f", this.x) + "," + String.format("%.1f", this.y) + ")";
   }
+
+  public double getX() {
+    return x;
+  }
+
+  public double getY() {
+    return y;
+  }
 }

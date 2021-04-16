@@ -54,4 +54,9 @@ public class Circle extends Oval {
     return new Circle(this.name, this.position, this.color,
             this.appearTime, this.disappearTime, newLength);
   }
+
+  @Override
+  public String getShapeTypeName() {
+    return "circle";
+  }
 }

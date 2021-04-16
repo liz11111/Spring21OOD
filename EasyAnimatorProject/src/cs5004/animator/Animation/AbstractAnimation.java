@@ -46,4 +46,5 @@ public abstract class AbstractAnimation implements Animation {
   public int getEndTime() {
     return this.endTime;
   }
+
 }

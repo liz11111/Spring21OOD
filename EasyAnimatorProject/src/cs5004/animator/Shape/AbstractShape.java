@@ -17,7 +17,6 @@ public abstract class AbstractShape implements Shape {
    * @param position      Position position of the shape
    * @param color         Color color of the shape
    * @param appearTime    int appear time of the shape
-   * @param disappearTime int disappear time of the shape
    * @throws IllegalArgumentException if name of time is invalid
    */
   protected AbstractShape(String name, Position position, Color color,
@@ -37,7 +36,7 @@ public abstract class AbstractShape implements Shape {
   }
 
   @Override
-  public Position getInitialPosition() {
+  public Position getPosition() {
     return this.position;
   }
 

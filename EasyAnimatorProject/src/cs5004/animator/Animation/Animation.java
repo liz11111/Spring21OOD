@@ -1,6 +1,8 @@
 package cs5004.animator.Animation;
 
 
+import cs5004.animator.Shape.Color;
+import cs5004.animator.Shape.Position;
 import cs5004.animator.Shape.Shape;
 
 /**
@@ -27,4 +29,10 @@ public interface Animation {
    * @return int end time of this animation
    */
   int getEndTime();
+
+  Position getPositionAtTick(int t);
+
+  Color getColorAtTick(int t);
+
+  double[] getScaleAtTick(int t);
 }

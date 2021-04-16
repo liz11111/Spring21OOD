@@ -55,4 +55,10 @@ public class Square extends Rectangle {
     return new Square(this.name, this.position, this.color,
             this.appearTime, this.disappearTime, newLength);
   }
+
+  @Override
+  public String getShapeTypeName() {
+    return "square";
+  }
+
 }

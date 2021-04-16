@@ -42,4 +42,16 @@ public class Color {
   public String toString() {
     return "(" + r + "," + g + "," + b + ")";
   }
+
+  public int getR() {
+    return r;
+  }
+
+  public int getG() {
+    return g;
+  }
+
+  public int getB() {
+    return b;
+  }
 }

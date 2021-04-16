@@ -1,5 +1,8 @@
 package cs5004.animator.model;
 
+import cs5004.animator.Shape.Oval;
+import cs5004.animator.Shape.Rectangle;
+import cs5004.animator.util.AnimationBuilder;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -22,6 +25,10 @@ import cs5004.animator.Shape.Shape;
  */
 public class AnimationModelImpl implements AnimationModel {
   Map<Shape, List<Animation>> animationHistory;
+  private int canvasHeight;
+  private int canvasWidth;
+  private int topBound;
+  private int leftBound;
 
   /**
    * Constructor for AnimationModelImpl.
@@ -36,12 +43,19 @@ public class AnimationModelImpl implements AnimationModel {
     }
     List<Animation> animations = new ArrayList<>();
     animations.add(new Display(shape, shape, shape.getAppearTime(), shape.getAppearTime()));
-    animations.add(new Vanish(shape, shape, shape.getDisappearTime(), shape.getDisappearTime()));
     animationHistory.put(shape, animations);
   }
 
-  public void getShapeAtTick(Shape shape, int tickTime) {
-    return;
+  public List<Shape> getShapeAtTick(int tickTime) {
+    for (Shape s: animationHistory.keySet()) {
+      List<Animation> list = animationHistory.get(s);
+      for (Animation animation: list) {
+        if (tickTime >= animation.getStartTime() && tickTime <= animation.getEndTime()) {
+
+        }
+      }
+    }
+
   }
 
   public void removeShape(Shape shape) {
@@ -209,6 +223,26 @@ public class AnimationModelImpl implements AnimationModel {
     }
   }
 
+  @Override
+  public int getCanvasHeight() {
+    return this.canvasHeight;
+  }
+
+  @Override
+  public int getCanvasWidth() {
+    return this.canvasWidth;
+  }
+
+  @Override
+  public int getLeftBound() {
+    return this.leftBound;
+  }
+
+  @Override
+  public int getTopBound() {
+    return this.topBound;
+  }
+
   public Map<Shape, List<Animation>> getAnimationHistory() {
     return animationHistory;
   }
@@ -243,5 +277,76 @@ public class AnimationModelImpl implements AnimationModel {
 
     sb.deleteCharAt(sb.length() - 1);
     return sb.toString();
+  }
+
+  public void setBounds(int x, int y, int width, int height) {
+    this.leftBound = x;
+    this.topBound = y;
+    this.canvasWidth = width;
+    this.canvasHeight = height;
+
+  }
+
+  public static class Builder implements AnimationBuilder<AnimationModel> {
+    private AnimationModelImpl model;
+    private Map<String, Shape> shapeMap = new HashMap<>();
+    private Map<String, String> nameMap = new HashMap<>();
+
+    @Override
+    public AnimationModel build() {
+      return model;
+    }
+
+    @Override
+    public AnimationBuilder<AnimationModel> setBounds(int x, int y, int width, int height) {
+      this.model.setBounds(x, y, width, height);
+      return this;
+    }
+
+    @Override
+    public AnimationBuilder<AnimationModel> declareShape(String name, String type) {
+      nameMap.put(name, type);
+      shapeMap.put(name, null);
+      return this;
+    }
+
+    @Override
+    public AnimationBuilder<AnimationModel> addMotion(String name, int t1, int x1, int y1,
+        int w1, int h1, int r1, int g1, int b1, int t2, int x2, int y2, int w2, int h2, int r2,
+        int g2, int b2) {
+      if (shapeMap.get(name) == null) {
+        String type = nameMap.get(name);
+        switch (type) {
+          case "rectangle":
+            Rectangle rec = new Rectangle(name, new Position(x1, y1), new Color(r1, g1, b1),
+                t1, t1, w1, h1);
+            this.model.addShape(rec);
+            shapeMap.put(name, rec);
+            break;
+          case "ellipse":
+            Oval oval = new Oval(name, new Position(x1, y1), new Color(r1, g1, b1),
+                t1, t1, w1, h1);
+            this.model.addShape(oval);
+            shapeMap.put(name, oval);
+            break;
+          default:
+            break;
+        }
+      }
+
+      if (x1 != x1 || y1 != y2) {
+        this.model.move(shapeMap.get(name), new Position(x2, y2), t1, t2);
+      }
+
+      if (w1 != w2 || h1 != h2) {
+        this.model.scale(shapeMap.get(name), w1 != w2 ? 1 : 2, w1 != w2? w2:h2, t1, t2);
+      }
+
+      if (r1 != r2 || g1 != g2 || b1 != b2) {
+        this.model.changeColor(shapeMap.get(name), new Color(r2, g2, b2), t1, t2);
+      }
+
+      return this;
+    }
   }
 }

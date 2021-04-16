@@ -62,4 +62,9 @@ public class Rectangle extends Parallelogram {
             sideToScale == 1 ? newLength : this.side1,
             sideToScale == 2 ? newLength : this.side2);
   }
+
+  @Override
+  public String getShapeTypeName() {
+    return "rectangle";
+  }
 }

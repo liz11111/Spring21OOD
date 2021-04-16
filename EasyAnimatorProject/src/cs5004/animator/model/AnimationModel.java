@@ -4,25 +4,19 @@ package cs5004.animator.model;
 import cs5004.animator.Shape.Color;
 import cs5004.animator.Shape.Position;
 import cs5004.animator.Shape.Shape;
+import java.util.List;
 
 /**
  * AnimationModel specifies all contracts an animation model implementation should adhere to. It
  * supports all functionalities of an animation model in the MVC pattern.
  */
-public interface AnimationModel {
+public interface AnimationModel extends ReadOnlyModel {
   /**
    * addShape adds a shape to the model.
    *
    * @param shape Shape shape to add
    */
   void addShape(Shape shape);
-
-  /**
-   * getShapeAtTick gets the specific information of a shape at specific time tick.
-   *
-   * @param tickTime int tick time
-   */
-  void getShapeAtTick(Shape shape, int tickTime);
 
   /**
    * removeShape removes a shape from the model.

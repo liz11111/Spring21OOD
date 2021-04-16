@@ -51,6 +51,11 @@ public class Parallelogram extends AbstractShape {
   }
 
   @Override
+  public String getShapeTypeName() {
+    return "parallelogram";
+  }
+
+  @Override
   public String getScale() {
     return "Angle: "
             + String.format("%.1f", this.angle) + ", "
@@ -58,6 +63,11 @@ public class Parallelogram extends AbstractShape {
             + String.format("%.1f", this.side1) + ", "
             + "Side2: "
             + String.format("%.1f", this.side2) + " ";
+  }
+
+  @Override
+  public double[] getSize() {
+    return new double[]{this.side1, this.side2, this.angle};
   }
 
   @Override

@@ -60,4 +60,10 @@ public class Rhombus extends Parallelogram {
     return new Rhombus(this.name, this.position, this.color,
             this.appearTime, this.disappearTime, this.angle, newLength);
   }
+
+  @Override
+  public String getShapeTypeName() {
+    return "rhombus";
+  }
+
 }

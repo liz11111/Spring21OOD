@@ -9,7 +9,9 @@ public interface Shape {
    *
    * @return Position initial position
    */
-  Position getInitialPosition();
+  Position getPosition();
+
+  String getShapeTypeName();
 
   /**
    * getAppearTime returns the appear time of the shape.
@@ -45,6 +47,8 @@ public interface Shape {
    * @return String scale of the shape
    */
   String getScale();
+
+  double[] getSize();
 
   /**
    * move returns a copy of the shape with position changed to new position.
