@@ -86,6 +86,16 @@ public class Triangle extends AbstractShape {
   }
 
   @Override
+  public void setScale(double[] newScale) {
+
+  }
+
+  @Override
+  public Shape getCopy() {
+    return null;
+  }
+
+  @Override
   public String getShapeTypeName() {
     return "triangle";
   }

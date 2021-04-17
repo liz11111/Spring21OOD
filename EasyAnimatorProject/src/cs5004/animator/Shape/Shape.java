@@ -74,4 +74,12 @@ public interface Shape {
    * @return Shape the copy of shape
    */
   Shape scale(int sideToScale, double newLength);
+
+  void setPosition(Position newPosition);
+
+  void setColor(Color newColor);
+
+  void setScale(double[] newScale);
+
+  Shape getCopy();
 }

@@ -43,11 +43,33 @@ public class AnimationModelImpl implements AnimationModel {
     }
     List<Animation> animations = new ArrayList<>();
     animations.add(new Display(shape, shape, shape.getAppearTime(), shape.getAppearTime()));
+    animations.add(new Vanish(shape, shape, shape.getDisappearTime(), shape.getDisappearTime()));
     animationHistory.put(shape, animations);
   }
 
   public List<Shape> getShapeAtTick(int tickTime) {
-    return null;
+    List<Shape> shapeList = new ArrayList<>();
+    for (Shape s: animationHistory.keySet()) {
+      List<Animation> list = animationHistory.get(s);
+      Shape newS = s.getCopy();
+      for (Animation animation: list) {
+        if (tickTime > animation.getEndTime()) {
+          newS = animation.getShape().getCopy();
+        } else if (tickTime >= animation.getStartTime() && tickTime <= animation.getEndTime()) {
+          if (animation instanceof ChangeColor) {
+            newS.setColor(animation.getColorAtTick(tickTime));
+          } else if (animation instanceof Scale) {
+            newS.setScale(animation.getScaleAtTick(tickTime));
+          } else if (animation instanceof Move) {
+            newS.setPosition(animation.getPositionAtTick(tickTime));
+          }
+        }
+
+      }
+      shapeList.add(newS);
+    }
+
+    return shapeList;
   }
 
   public void removeShape(Shape shape) {
@@ -280,7 +302,7 @@ public class AnimationModelImpl implements AnimationModel {
   }
 
   public static class Builder implements AnimationBuilder<AnimationModel> {
-    private AnimationModelImpl model;
+    private AnimationModelImpl model = new AnimationModelImpl();
     private Map<String, Shape> shapeMap = new HashMap<>();
     private Map<String, String> nameMap = new HashMap<>();
 

@@ -67,4 +67,10 @@ public class Rectangle extends Parallelogram {
   public String getShapeTypeName() {
     return "rectangle";
   }
+
+  @Override
+  public Rectangle getCopy() {
+    return new Rectangle(this.name, this.position, this.color, this.appearTime, this.disappearTime,
+        this.side1, this.side2);
+  }
 }

@@ -89,4 +89,17 @@ public class Parallelogram extends AbstractShape {
             sideToScale == 1 ? newLength : this.side1,
             sideToScale == 2 ? newLength : this.side2);
   }
+
+  @Override
+  public void setScale(double[] newScale) {
+    this.side1 = newScale[0];
+    this.side2 = newScale[1];
+  }
+
+  @Override
+  public Shape getCopy() {
+    return null;
+  }
+
+
 }
