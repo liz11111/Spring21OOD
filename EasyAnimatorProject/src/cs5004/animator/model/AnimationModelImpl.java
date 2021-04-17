@@ -47,15 +47,7 @@ public class AnimationModelImpl implements AnimationModel {
   }
 
   public List<Shape> getShapeAtTick(int tickTime) {
-    for (Shape s: animationHistory.keySet()) {
-      List<Animation> list = animationHistory.get(s);
-      for (Animation animation: list) {
-        if (tickTime >= animation.getStartTime() && tickTime <= animation.getEndTime()) {
-
-        }
-      }
-    }
-
+    return null;
   }
 
   public void removeShape(Shape shape) {
