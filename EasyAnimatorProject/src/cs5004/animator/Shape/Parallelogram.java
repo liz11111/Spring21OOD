@@ -38,6 +38,7 @@ public class Parallelogram extends AbstractShape {
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
+    sb.append("Create:\n");
     sb.append("Name: " + this.name + "\n");
     sb.append("Type: " + "parallelogram\n");
     sb.append("corner: " + position.toString() + ", ");
@@ -46,7 +47,7 @@ public class Parallelogram extends AbstractShape {
     sb.append("Angle: " + String.format("%.1f", angle) + ", ");
     sb.append("Color: " + color.toString() + "\n");
     sb.append("Appears at t=" + appearTime + "\n");
-    sb.append("Disappears at t=" + disappearTime + "\n\n");
+    sb.append("\n");
     return sb.toString();
   }
 

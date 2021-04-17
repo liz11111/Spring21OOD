@@ -3,6 +3,7 @@ package cs5004.animator.model;
 import cs5004.animator.Shape.Oval;
 import cs5004.animator.Shape.Rectangle;
 import cs5004.animator.util.AnimationBuilder;
+
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
@@ -49,10 +50,10 @@ public class AnimationModelImpl implements AnimationModel {
 
   public List<Shape> getShapeAtTick(int tickTime) {
     List<Shape> shapeList = new ArrayList<>();
-    for (Shape s: animationHistory.keySet()) {
+    for (Shape s : animationHistory.keySet()) {
       List<Animation> list = animationHistory.get(s);
       Shape newS = s.getCopy();
-      for (Animation animation: list) {
+      for (Animation animation : list) {
         if (tickTime > animation.getEndTime()) {
           newS = animation.getShape().getCopy();
         } else if (tickTime >= animation.getStartTime() && tickTime <= animation.getEndTime()) {
@@ -257,6 +258,7 @@ public class AnimationModelImpl implements AnimationModel {
     return this.topBound;
   }
 
+  @Override
   public Map<Shape, List<Animation>> getAnimationHistory() {
     return animationHistory;
   }
@@ -326,20 +328,20 @@ public class AnimationModelImpl implements AnimationModel {
 
     @Override
     public AnimationBuilder<AnimationModel> addMotion(String name, int t1, int x1, int y1,
-        int w1, int h1, int r1, int g1, int b1, int t2, int x2, int y2, int w2, int h2, int r2,
-        int g2, int b2) {
+                                                      int w1, int h1, int r1, int g1, int b1, int t2, int x2, int y2, int w2, int h2, int r2,
+                                                      int g2, int b2) {
       if (shapeMap.get(name) == null) {
         String type = nameMap.get(name);
         switch (type) {
           case "rectangle":
             Rectangle rec = new Rectangle(name, new Position(x1, y1), new Color(r1, g1, b1),
-                t1, t1, w1, h1);
+                    t1, t1, w1, h1);
             this.model.addShape(rec);
             shapeMap.put(name, rec);
             break;
           case "ellipse":
             Oval oval = new Oval(name, new Position(x1, y1), new Color(r1, g1, b1),
-                t1, t1, w1, h1);
+                    t1, t1, w1, h1);
             this.model.addShape(oval);
             shapeMap.put(name, oval);
             break;
@@ -353,7 +355,7 @@ public class AnimationModelImpl implements AnimationModel {
       }
 
       if (w1 != w2 || h1 != h2) {
-        this.model.scale(shapeMap.get(name), w1 != w2 ? 1 : 2, w1 != w2? w2:h2, t1, t2);
+        this.model.scale(shapeMap.get(name), w1 != w2 ? 1 : 2, w1 != w2 ? w2 : h2, t1, t2);
       }
 
       if (r1 != r2 || g1 != g2 || b1 != b2) {

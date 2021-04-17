@@ -13,10 +13,10 @@ public abstract class AbstractShape implements Shape {
   /**
    * Constructor for an abstract shape.
    *
-   * @param name          String name of the shape
-   * @param position      Position position of the shape
-   * @param color         Color color of the shape
-   * @param appearTime    int appear time of the shape
+   * @param name       String name of the shape
+   * @param position   Position position of the shape
+   * @param color      Color color of the shape
+   * @param appearTime int appear time of the shape
    * @throws IllegalArgumentException if name of time is invalid
    */
   protected AbstractShape(String name, Position position, Color color,

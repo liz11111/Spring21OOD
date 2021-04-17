@@ -2,12 +2,14 @@ package cs5004.animator.view;
 
 import cs5004.animator.model.ReadOnlyModel;
 import cs5004.animator.Shape.Shape;
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.List;
+
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
@@ -38,13 +40,13 @@ public class GraphicsView extends JFrame implements View, ActionListener {
     panel = new MyPanel(this.model.getLeftBound(), this.model.getTopBound());
     panel.setBackground(Color.WHITE);
     panel.setPreferredSize(new Dimension(this.model.getCanvasWidth(),
-        this.model.getCanvasHeight()));
+            this.model.getCanvasHeight()));
     this.add(panel);
 
     // add scroll pane
-   JScrollPane scrollPane = new JScrollPane(this.panel,
-       JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
-   this.add(scrollPane);
+    JScrollPane scrollPane = new JScrollPane(this.panel,
+            JScrollPane.VERTICAL_SCROLLBAR_ALWAYS, JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS);
+    this.add(scrollPane);
 
     this.setVisible(true);
 
@@ -62,8 +64,8 @@ public class GraphicsView extends JFrame implements View, ActionListener {
 
   @Override
   public void showErrorMessage(String errorMessage) {
-    JOptionPane.showMessageDialog(this, errorMessage,"Error",
-        JOptionPane.ERROR_MESSAGE);
+    JOptionPane.showMessageDialog(this, errorMessage, "Error",
+            JOptionPane.ERROR_MESSAGE);
   }
 
   @Override

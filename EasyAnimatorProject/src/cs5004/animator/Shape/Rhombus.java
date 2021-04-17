@@ -24,6 +24,7 @@ public class Rhombus extends Parallelogram {
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
+    sb.append("Create:\n");
     sb.append("Name: " + this.name + "\n");
     sb.append("Type: " + "rhombus\n");
     sb.append("corner: " + position.toString() + ", ");
@@ -31,7 +32,7 @@ public class Rhombus extends Parallelogram {
     sb.append("Angle: " + String.format("%.1f", angle) + ", ");
     sb.append("Color: " + color.toString() + "\n");
     sb.append("Appears at t=" + appearTime + "\n");
-    sb.append("Disappears at t=" + disappearTime + "\n\n");
+    sb.append("\n");
     return sb.toString();
   }
 

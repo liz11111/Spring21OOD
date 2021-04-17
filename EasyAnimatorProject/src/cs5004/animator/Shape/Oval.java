@@ -34,6 +34,7 @@ public class Oval extends AbstractShape {
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
+    sb.append("Create:\n");
     sb.append("Name: " + this.name + "\n");
     sb.append("Type: " + "oval\n");
     sb.append("Center: " + position.toString() + ", ");
@@ -41,7 +42,7 @@ public class Oval extends AbstractShape {
             + ", " + "Vertical Radius: " + String.format("%.1f", this.verticalRadius) + ", ");
     sb.append("Color: " + color.toString() + "\n");
     sb.append("Appears at t=" + appearTime + "\n");
-    sb.append("Disappears at t=" + disappearTime + "\n\n");
+    sb.append("\n");
     return sb.toString();
   }
 
@@ -90,6 +91,6 @@ public class Oval extends AbstractShape {
   @Override
   public Oval getCopy() {
     return new Oval(this.name, this.position, this.color, this.appearTime, this.disappearTime,
-        this.radius, this.verticalRadius);
+            this.radius, this.verticalRadius);
   }
 }

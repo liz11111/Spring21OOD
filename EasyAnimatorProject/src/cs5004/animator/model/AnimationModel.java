@@ -1,10 +1,13 @@
 package cs5004.animator.model;
 
 
+import cs5004.animator.Animation.Animation;
 import cs5004.animator.Shape.Color;
 import cs5004.animator.Shape.Position;
 import cs5004.animator.Shape.Shape;
+
 import java.util.List;
+import java.util.Map;
 
 /**
  * AnimationModel specifies all contracts an animation model implementation should adhere to. It
@@ -62,4 +65,11 @@ public interface AnimationModel extends ReadOnlyModel {
    * @param endTime   int end time of changing color
    */
   void changeColor(Shape shape, Color newColor, int startTime, int endTime);
+
+  /**
+   * Getter for animation history
+   *
+   * @return Map<Shape, List < Animation>> </Animation> animation history
+   */
+  Map<Shape, List<Animation>> getAnimationHistory();
 }

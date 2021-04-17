@@ -23,13 +23,14 @@ public class Square extends Rectangle {
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
+    sb.append("Create:\n");
     sb.append("Name: " + this.name + "\n");
     sb.append("Type: " + "square\n");
     sb.append("corner: " + position.toString() + ", ");
     sb.append("Side: " + String.format("%.1f", side1) + ", ");
     sb.append("Color: " + color.toString() + "\n");
     sb.append("Appears at t=" + appearTime + "\n");
-    sb.append("Disappears at t=" + disappearTime + "\n\n");
+    sb.append("\n");
     return sb.toString();
   }
 

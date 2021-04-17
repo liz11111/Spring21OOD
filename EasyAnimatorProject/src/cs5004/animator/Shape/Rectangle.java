@@ -24,6 +24,7 @@ public class Rectangle extends Parallelogram {
   @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
+    sb.append("Create:\n");
     sb.append("Name: " + this.name + "\n");
     sb.append("Type: " + "rectangle\n");
     sb.append("corner: " + position.toString() + ", ");
@@ -31,7 +32,7 @@ public class Rectangle extends Parallelogram {
             "Height: " + String.format("%.1f", side2) + ", ");
     sb.append("Color: " + color.toString() + "\n");
     sb.append("Appears at t=" + appearTime + "\n");
-    sb.append("Disappears at t=" + disappearTime + "\n\n");
+    sb.append("\n");
     return sb.toString();
   }
 
@@ -71,6 +72,6 @@ public class Rectangle extends Parallelogram {
   @Override
   public Rectangle getCopy() {
     return new Rectangle(this.name, this.position, this.color, this.appearTime, this.disappearTime,
-        this.side1, this.side2);
+            this.side1, this.side2);
   }
 }
