@@ -1,5 +1,9 @@
 package cs5004.animator.util;
 
+/**
+ * AnimationBuilder helps build the animation model.
+ * @param <Doc> input
+ */
 public interface AnimationBuilder<Doc> {
   /**
    * Constructs a final document.

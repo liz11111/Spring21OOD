@@ -6,8 +6,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.PriorityQueue;
 
-import cs5004.animator.Animation.Animation;
-import cs5004.animator.Shape.Shape;
+import cs5004.animator.animation.Animation;
+import cs5004.animator.shape.Shape;
 import cs5004.animator.model.ReadOnlyModel;
 
 /**

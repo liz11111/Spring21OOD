@@ -82,16 +82,34 @@ public class AnimationReader {
   }
 
   private static <Doc> void readMotion(Scanner s, AnimationBuilder<Doc> builder) {
-    String[] fieldNames = new String[]{
-            "initial time",
+    String[] fieldNames = new String[16];
+    fieldNames[0] = "initial time";
+    fieldNames[1] = "initial x-coordinate";
+    fieldNames[2] = "initial y-coordinate";
+    fieldNames[3] = "initial width";
+    fieldNames[4] = "initial height";
+    fieldNames[5] = "initial red value";
+    fieldNames[6] = "initial green value";
+    fieldNames[7] = "initial blue value";
+    fieldNames[8] = "final time";
+    fieldNames[9] = "final x-coordinate";
+    fieldNames[10] = "final y-coordinate";
+    fieldNames[11] = "final width";
+    fieldNames[12] = "final height";
+    fieldNames[13] = "final red value";
+    fieldNames[14] = "final green value";
+    fieldNames[15] = "final blue value";
+
+    /*String[] fieldNames = new String[] {"initial time",
             "initial x-coordinate", "initial y-coordinate",
             "initial width", "initial height",
-            "initial red value", "initial green value", "initial blue value",
-            "final time",
+            "initial red value", "initial green value",
+            "initial blue value", "final time",
             "final x-coordinate", "final y-coordinate",
             "final width", "final height",
-            "final red value", "final green value", "final blue value",
-    };
+            "final red value", "final green value",
+            "final blue value",
+    };*/
     int[] vals = new int[16];
     String name;
     if (s.hasNext()) {

@@ -1,28 +1,34 @@
 package cs5004.animator.view;
 
-import cs5004.animator.Animation.Animation;
-import cs5004.animator.Animation.ChangeColor;
-import cs5004.animator.Animation.Display;
-import cs5004.animator.Animation.Move;
-import cs5004.animator.Animation.Scale;
-import cs5004.animator.Shape.Color;
-import cs5004.animator.Shape.Position;
-import cs5004.animator.Shape.Shape;
+import cs5004.animator.animation.Animation;
+import cs5004.animator.animation.ChangeColor;
+import cs5004.animator.animation.Move;
+import cs5004.animator.animation.Scale;
+import cs5004.animator.shape.Color;
+import cs5004.animator.shape.Position;
+import cs5004.animator.shape.Shape;
 import cs5004.animator.model.ReadOnlyModel;
-import java.io.File;
+
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.Comparator;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
-import java.util.PriorityQueue;
 import java.util.Set;
 
+/**
+ * SVGView implements View and supports showing the view as an SVG file.
+ */
 public class SVGView implements View {
   private ReadOnlyModel model;
   private StringBuilder animationText;
 
+  /**
+   * Constructor for SVGView.
+   *
+   * @param model ReadOnlyModel model
+   * @throws IllegalArgumentException if model is null
+   */
   public SVGView(ReadOnlyModel model) throws IllegalArgumentException {
     if (model == null) {
       throw new IllegalArgumentException("Model can't be null");
@@ -34,9 +40,12 @@ public class SVGView implements View {
 
   }
 
+  /**
+   * createCanvas creates canvas.
+   */
   private void createCanvas() {
     String canvas = String.format("<svg width=\"%d\" height=\"%d\" version=\"1.1\"\n"
-        + "xmlns=\"http://www.w3.org/2000/svg\"> \n", model.getCanvasWidth(), model.getCanvasHeight());
+            + "xmlns=\"http://www.w3.org/2000/svg\"> \n", model.getCanvasWidth(), model.getCanvasHeight());
     animationText.append(canvas);
   }
 
@@ -46,7 +55,7 @@ public class SVGView implements View {
     Map<Shape, List<Animation>> animationHistory = model.getAnimationHistory();
     List<Shape> shapeList = model.getShapeAtTick(startTime);
 
-    for (Shape initialShape: shapeList) {
+    for (Shape initialShape : shapeList) {
       // initialize the shape
       // get the shape type
       String shapeType;
@@ -56,25 +65,27 @@ public class SVGView implements View {
         case ("rectangle"):
           shapeType = "rect";
           initialization = "<%s id=\"%s\" x=\"%.2f\" y=\"%.2f\" width=\"%.2f\" "
-              + "height=\"%.2f\" fill=\"rgb(%d,%d,%d)\" visibility=\"visible\" > \n";
+                  + "height=\"%.2f\" fill=\"rgb(%d,%d,%d)\" visibility=\"visible\" > \n";
           initialization = String.format(initialization,
-              shapeType, initialShape.getName(), initialShape.getPosition().getX() -
-                  this.model.getLeftBound(), initialShape.getPosition().getY() -
-                  this.model.getTopBound(), initialShape.getSize()[0], initialShape.getSize()[1],
-              initialShape.getColor().getR(), initialShape.getColor().getG(),
-              initialShape.getColor().getB());
+                  shapeType, initialShape.getName(), initialShape.getPosition().getX() -
+                          this.model.getLeftBound(), initialShape.getPosition().getY() -
+                          this.model.getTopBound(), initialShape.getSize()[0],
+                  initialShape.getSize()[1],
+                  initialShape.getColor().getR(), initialShape.getColor().getG(),
+                  initialShape.getColor().getB());
 
           break;
         case ("ellipse"):
           shapeType = "ellipse";
           initialization = "<%s id=\"%s\" cx=\"%.2f\" cy=\"%.2f\" rx=\"%.2f\" ry=\"%.2f\" "
-              + "fill=\"rgb(%d,%d,%d)\" visibility=\"visible\"> \n";
+                  + "fill=\"rgb(%d,%d,%d)\" visibility=\"visible\"> \n";
           initialization = String.format(initialization,
-              shapeType, initialShape.getName(), initialShape.getPosition().getX() -
-                  this.model.getLeftBound(), initialShape.getPosition().getY() -
-                  this.model.getTopBound(), initialShape.getSize()[0]/2, initialShape.getSize()[1]/2,
-              initialShape.getColor().getR(), initialShape.getColor().getG(),
-              initialShape.getColor().getB());
+                  shapeType, initialShape.getName(), initialShape.getPosition().getX() -
+                          this.model.getLeftBound(), initialShape.getPosition().getY() -
+                          this.model.getTopBound(), initialShape.getSize()[0] / 2,
+                  initialShape.getSize()[1] / 2,
+                  initialShape.getColor().getR(), initialShape.getColor().getG(),
+                  initialShape.getColor().getB());
 
           break;
         default:
@@ -83,23 +94,23 @@ public class SVGView implements View {
       animationText.append(initialization);
 
       List<Animation> animationList = animationHistory.get(initialShape);
-      for (Animation animation: animationList) {
+      for (Animation animation : animationList) {
         if (startTime >= animation.getStartTime() && startTime < animation.getEndTime()) {
           int beginTime = startTime;
           int endTime = animation.getEndTime();
 
           if (animation instanceof ChangeColor) {
             this.addChangeColor(beginTime * 1000 / speed, endTime * 1000 / speed,
-                initialShape.getColor(), animation.getShape().getColor(),
-                startTime * 1000 / speed);
+                    initialShape.getColor(), animation.getShape().getColor(),
+                    startTime * 1000 / speed);
           } else if (animation instanceof Move) {
             this.addMove(beginTime * 1000 / speed, endTime * 1000 / speed,
-                initialShape.getPosition(), animation.getShape().getPosition(), shapeType,
-                startTime * 1000 / speed);
+                    initialShape.getPosition(), animation.getShape().getPosition(), shapeType,
+                    startTime * 1000 / speed);
           } else if (animation instanceof Scale) {
             this.addScale(beginTime * 1000 / speed, endTime * 1000 / speed,
-                initialShape.getSize(), animation.getShape().getSize(), shapeType,
-                startTime * 1000 / speed);
+                    initialShape.getSize(), animation.getShape().getSize(), shapeType,
+                    startTime * 1000 / speed);
           }
         } else if (startTime < animation.getStartTime()) {
           int beginTime = animation.getStartTime();
@@ -107,16 +118,16 @@ public class SVGView implements View {
 
           if (animation instanceof ChangeColor) {
             this.addChangeColor(beginTime * 1000 / speed, endTime * 1000 / speed,
-                animation.getColorAtTick(beginTime), animation.getShape().getColor(),
-                startTime * 1000 / speed);
+                    animation.getColorAtTick(beginTime), animation.getShape().getColor(),
+                    startTime * 1000 / speed);
           } else if (animation instanceof Move) {
             this.addMove(beginTime * 1000 / speed, endTime * 1000 / speed,
-                animation.getPositionAtTick(beginTime), animation.getShape().getPosition(),
-                shapeType, startTime * 1000 / speed);
+                    animation.getPositionAtTick(beginTime), animation.getShape().getPosition(),
+                    shapeType, startTime * 1000 / speed);
           } else if (animation instanceof Scale) {
             this.addScale(beginTime * 1000 / speed, endTime * 1000 / speed,
-                animation.getScaleAtTick(beginTime), animation.getShape().getSize(), shapeType,
-                startTime * 1000 / speed);
+                    animation.getScaleAtTick(beginTime), animation.getShape().getSize(), shapeType,
+                    startTime * 1000 / speed);
           }
         }
 
@@ -126,7 +137,7 @@ public class SVGView implements View {
 
     Set<Shape> visitedShape = new HashSet<>(shapeList);
 
-    for (Shape shape: animationHistory.keySet()) {
+    for (Shape shape : animationHistory.keySet()) {
       String shapeType;
       String initialization;
 
@@ -136,22 +147,24 @@ public class SVGView implements View {
           case ("rectangle"):
             shapeType = "rect";
             initialization = "<%s id=\"%s\" x=\"%.2f\" y=\"%.2f\" width=\"%.2f\" "
-                + "height=\"%.2f\" fill=\"rgb(%d,%d,%d)\" visibility=\"visible\" > \n";
+                    + "height=\"%.2f\" fill=\"rgb(%d,%d,%d)\" visibility=\"visible\" > \n";
             initialization = String.format(initialization,
-                shapeType, shape.getName(), shape.getPosition().getX() - this.model.getLeftBound(),
-                shape.getPosition().getY() - this.model.getTopBound(),
-                shape.getSize()[0], shape.getSize()[1], shape.getColor().getR(),
-                shape.getColor().getG(), shape.getColor().getB());
+                    shapeType, shape.getName(), shape.getPosition().getX() -
+                            this.model.getLeftBound(),
+                    shape.getPosition().getY() - this.model.getTopBound(),
+                    shape.getSize()[0], shape.getSize()[1], shape.getColor().getR(),
+                    shape.getColor().getG(), shape.getColor().getB());
             break;
           case ("ellipse"):
             shapeType = "ellipse";
             initialization = "<%s id=\"%s\" cx=\"%.2f\" cy=\"%.2f\" rx=\"%.2f\" ry=\"%.2f\" "
-                + "fill=\"rgb(%d,%d,%d)\" visibility=\"visible\">";
+                    + "fill=\"rgb(%d,%d,%d)\" visibility=\"visible\">";
             initialization = String.format(initialization,
-                shapeType, shape.getName(), shape.getPosition().getX() - this.model.getLeftBound(),
-                shape.getPosition().getY() - this.model.getTopBound(),
-                shape.getSize()[0]/2, shape.getSize()[1]/2, shape.getColor().getR(),
-                shape.getColor().getG(), shape.getColor().getB());
+                    shapeType, shape.getName(), shape.getPosition().getX() -
+                            this.model.getLeftBound(),
+                    shape.getPosition().getY() - this.model.getTopBound(),
+                    shape.getSize()[0] / 2, shape.getSize()[1] / 2, shape.getColor().getR(),
+                    shape.getColor().getG(), shape.getColor().getB());
 
             break;
           default:
@@ -161,22 +174,23 @@ public class SVGView implements View {
         animationText.append(initialization);
 
         List<Animation> animationList = animationHistory.get(shape);
-        for (Animation animation: animationList) {
+        for (Animation animation : animationList) {
           int beginTime = animation.getStartTime();
           int endTime = animation.getEndTime();
 
           if (animation instanceof ChangeColor) {
             this.addChangeColor(beginTime * 1000 / speed, endTime * 1000 / speed,
-                animation.getColorAtTick(beginTime), animation.getColorAtTick(endTime),
-                startTime * 1000 / speed);
+                    animation.getColorAtTick(beginTime), animation.getColorAtTick(endTime),
+                    startTime * 1000 / speed);
           } else if (animation instanceof Move) {
             this.addMove(beginTime * 1000 / speed, endTime * 1000 / speed,
-                animation.getPositionAtTick(beginTime), animation.getPositionAtTick(endTime),
-                shapeType, startTime * 1000 / speed);
+                    animation.getPositionAtTick(beginTime), animation.getPositionAtTick(endTime),
+                    shapeType, startTime * 1000 / speed);
           } else if (animation instanceof Scale) {
             this.addScale(beginTime * 1000 / speed, endTime * 1000 / speed,
-                animation.getScaleAtTick(beginTime), animation.getScaleAtTick(endTime), shapeType,
-                startTime * 1000 / speed);
+                    animation.getScaleAtTick(beginTime), animation.getScaleAtTick(endTime),
+                    shapeType,
+                    startTime * 1000 / speed);
           }
         }
         animationText.append(String.format("</%s>\n", shapeType));
@@ -192,10 +206,21 @@ public class SVGView implements View {
     System.out.print(errorMessage);
   }
 
+  /**
+   * getStringOutput returns the SVG as string.
+   *
+   * @return String svg
+   */
   public String getStringOutput() {
     return this.animationText.toString();
   }
 
+  /**
+   * saveSVG saves the SVG generated to SVG file in filePath.
+   *
+   * @param filePath String filePath
+   * @throws IOException if file not found
+   */
   public void saveSVG(String filePath) throws IOException {
     FileWriter writer = new FileWriter(filePath);
     try {
@@ -207,33 +232,59 @@ public class SVGView implements View {
     }
   }
 
+  /**
+   * addChangeColor adds change color animation to svg file.
+   *
+   * @param beginTime int begin time
+   * @param endTime   int end time
+   * @param fromColor Color from color
+   * @param toColor   Color to color
+   * @param baseTime  int base time
+   */
   private void addChangeColor(int beginTime, int endTime, Color fromColor, Color toColor,
-      int baseTime) {
+                              int baseTime) {
     int duration = endTime - beginTime;
     String changeColor = String.format("<animate attributeType=\"xml\" begin=\"%dms\""
-        + " dur=\"%dms\" attributeName=\"fill\" fill=\"freeze\" from=\"rgb(%d,%d,%d)\" to=\"rgb(%d,%d,%d)\""
-        + " />\n", beginTime - baseTime, duration, fromColor.getR(), fromColor.getG(), fromColor.getB(),
-        toColor.getR(), toColor.getG(), toColor.getB());
+                    + " dur=\"%dms\" attributeName=\"fill\" fill=\"freeze\" " +
+                    "from=\"rgb(%d,%d,%d)\" to=\"rgb(%d,%d,%d)\""
+                    + " />\n", beginTime - baseTime, duration, fromColor.getR(), fromColor.getG()
+            , fromColor.getB(),
+            toColor.getR(), toColor.getG(), toColor.getB());
     animationText.append(changeColor);
   }
 
+  /**
+   * addMove adds move animation to svg file.
+   *
+   * @param beginTime    int begin time
+   * @param endTime      int end time
+   * @param fromPosition Position from position
+   * @param toPosition   Position to position
+   * @param shapeType    String shape type
+   * @param baseTime     int base time
+   */
   private void addMove(int beginTime, int endTime, Position fromPosition, Position toPosition,
-      String shapeType, int baseTime) {
+                       String shapeType, int baseTime) {
     int duration = endTime - beginTime;
-    String moveX, moveY;
+    String moveX;
+    String moveY;
 
-    switch(shapeType) {
+    switch (shapeType) {
       case ("rect"):
         moveX = "<animate attributeType=\"xml\" begin=\"%dms\" "
-            + "dur=\"%dms\" attributeName=\"x\" from=\"%.2f\" to=\"%.2f\" fill=\"freeze\" />\n";
+                + "dur=\"%dms\" attributeName=\"x\" from=\"%.2f\" to=\"%.2f\" " +
+                "fill=\"freeze\" />\n";
         moveY = "<animate attributeType=\"xml\" begin=\"%dms\" "
-            + "dur=\"%dms\" attributeName=\"y\" from=\"%.2f\" to=\"%.2f\" fill=\"freeze\" />\n";
+                + "dur=\"%dms\" attributeName=\"y\" from=\"%.2f\" to=\"%.2f\" " +
+                "fill=\"freeze\" />\n";
         break;
       case ("ellipse"):
         moveX = "<animate attributeType=\"xml\" begin=\"%dms\" "
-            + "dur=\"%dms\" attributeName=\"cx\" from=\"%.2f\" to=\"%.2f\" fill=\"freeze\" />\n";
+                + "dur=\"%dms\" attributeName=\"cx\" from=\"%.2f\" to=\"%.2f\" " +
+                "fill=\"freeze\" />\n";
         moveY = "<animate attributeType=\"xml\" begin=\"%dms\" "
-            + "dur=\"%dms\" attributeName=\"cy\" from=\"%.2f\" to=\"%.2f\" fill=\"freeze\" />\n";
+                + "dur=\"%dms\" attributeName=\"cy\" from=\"%.2f\" to=\"%.2f\" " +
+                "fill=\"freeze\" />\n";
         break;
       default:
         throw new IllegalArgumentException("No such shape");
@@ -247,32 +298,43 @@ public class SVGView implements View {
     animationText.append(moveY);
   }
 
+  /**
+   * addScale adds scale animation to svg.
+   *
+   * @param beginTime int begin time
+   * @param endTime   int end time
+   * @param fromScale double[] from scale
+   * @param toScale   double[] to scale
+   * @param shapeType String shape type
+   * @param baseTime  int base time
+   */
   private void addScale(int beginTime, int endTime, double[] fromScale, double[] toScale,
-      String shapeType, int baseTime) {
+                        String shapeType, int baseTime) {
     int duration = endTime - beginTime;
-    String scaleWidth, scaleHeight;
+    String scaleWidth;
+    String scaleHeight;
 
     switch (shapeType) {
       case ("rect"):
         scaleWidth = "<animate attributeName=\"width\" fill=\"freeze\" "
-            + "from=\"%.2f\" to=\"%.2f\" begin=\"%dms\" dur=\"%dms\" />\n";
+                + "from=\"%.2f\" to=\"%.2f\" begin=\"%dms\" dur=\"%dms\" />\n";
         scaleHeight = "<animate attributeName=\"height\" fill=\"freeze\" "
-            + "from=\"%.2f\" to=\"%.2f\" begin=\"%dms\" dur=\"%dms\" />\n";
+                + "from=\"%.2f\" to=\"%.2f\" begin=\"%dms\" dur=\"%dms\" />\n";
         scaleWidth = String.format(scaleWidth, fromScale[0], toScale[0],
-            beginTime - baseTime, duration);
+                beginTime - baseTime, duration);
         scaleHeight = String.format(scaleHeight, fromScale[1], toScale[1],
-            beginTime - baseTime, duration);
+                beginTime - baseTime, duration);
 
         break;
       case ("ellipse"):
         scaleWidth = "<animate attributeName=\"rx\" fill=\"freeze\" "
-            + "from=\"%.2f\" to=\"%.2f\" begin=\"%dms\" dur=\"%dms\" />\n";
+                + "from=\"%.2f\" to=\"%.2f\" begin=\"%dms\" dur=\"%dms\" />\n";
         scaleHeight = "<animate attributeName=\"ry\" fill=\"freeze\" "
-            + "from=\"%.2f\" to=\"%.2f\" begin=\"%dms\" dur=\"%dms\" />\n";
-        scaleWidth = String.format(scaleWidth, fromScale[0]/2, toScale[0]/2,
-            beginTime, duration);
-        scaleHeight = String.format(scaleHeight, fromScale[1]/2, toScale[1]/2,
-            beginTime, duration);
+                + "from=\"%.2f\" to=\"%.2f\" begin=\"%dms\" dur=\"%dms\" />\n";
+        scaleWidth = String.format(scaleWidth, fromScale[0] / 2, toScale[0] / 2,
+                beginTime, duration);
+        scaleHeight = String.format(scaleHeight, fromScale[1] / 2, toScale[1] / 2,
+                beginTime, duration);
 
         break;
       default:
@@ -282,6 +344,5 @@ public class SVGView implements View {
     animationText.append(scaleWidth);
     animationText.append(scaleHeight);
   }
-
 
 }

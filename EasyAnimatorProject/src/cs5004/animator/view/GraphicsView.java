@@ -1,7 +1,7 @@
 package cs5004.animator.view;
 
 import cs5004.animator.model.ReadOnlyModel;
-import cs5004.animator.Shape.Shape;
+import cs5004.animator.shape.Shape;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -16,12 +16,19 @@ import javax.swing.JScrollPane;
 import javax.swing.Timer;
 import javax.swing.WindowConstants;
 
+/**
+ * GraphicView implements View interface and supports showing view as graphics.
+ */
 public class GraphicsView extends JFrame implements View, ActionListener {
   private ReadOnlyModel model;
-  private Timer timer;
   private int tick;
   private MyPanel panel;
 
+  /**
+   * Constructor for GraphicsView.
+   * @param model ReadOnlyModel model
+   * @throws IllegalArgumentException if model is null
+   */
   public GraphicsView(ReadOnlyModel model) throws IllegalArgumentException {
     super();
 
@@ -55,7 +62,7 @@ public class GraphicsView extends JFrame implements View, ActionListener {
 
   @Override
   public void play(int startTime, int speed) {
-    timer = new Timer(1000 / speed, this);
+    Timer timer = new Timer(1000 / speed, this);
     tick = startTime;
     List<Shape> shapeList = model.getShapeAtTick(tick);
     panel.paintShapes(shapeList);
@@ -76,6 +83,9 @@ public class GraphicsView extends JFrame implements View, ActionListener {
     this.refresh();
   }
 
+  /**
+   * refresh refreshes the canvas.
+   */
   public void refresh() {
     this.repaint();
   }
