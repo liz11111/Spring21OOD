@@ -30,4 +30,21 @@ public class Position {
   public double getY() {
     return y;
   }
+
+  @Override
+  public boolean equals(Object o) {
+    if (o == this) {
+      return true;
+    }
+
+    if (!(o instanceof Position)) {
+      return false;
+    }
+
+    Position positionObj = (Position) o;
+
+    return (positionObj.getX() == this.getX() && positionObj.getY() == this.getY());
+  }
+
 }
+

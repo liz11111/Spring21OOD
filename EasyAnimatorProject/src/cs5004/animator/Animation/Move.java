@@ -37,6 +37,10 @@ public class Move extends AbstractAnimation {
 
   @Override
   public Position getPositionAtTick(int t) {
+    if (this.startTime == this.endTime) {
+      return new Position(this.fromShape.getPosition().getX(), this.fromShape.getPosition().getY());
+    }
+
     double x = this.fromShape.getPosition().getX() * (this.endTime - t) / (this.endTime - this.startTime) +
         this.toShape.getPosition().getX() * (t - this.startTime) / (this.endTime - this.startTime);
     double y = this.fromShape.getPosition().getY() * (this.endTime - t) / (this.endTime - this.startTime) +

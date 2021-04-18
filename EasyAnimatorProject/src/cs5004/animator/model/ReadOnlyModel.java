@@ -1,7 +1,9 @@
 package cs5004.animator.model;
 
+import cs5004.animator.Animation.Animation;
 import cs5004.animator.Shape.Shape;
 import java.util.List;
+import java.util.Map;
 
 public interface ReadOnlyModel {
 
@@ -19,5 +21,7 @@ public interface ReadOnlyModel {
   int getLeftBound();
 
   int getTopBound();
+
+  Map<Shape, List<Animation>> getAnimationHistory();
 
 }
