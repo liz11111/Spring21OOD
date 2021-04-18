@@ -15,6 +15,7 @@ public class EasyAnimator {
 
   public static void main(String[] args) throws FileNotFoundException, IllegalArgumentException {
     //String fileName = "big-bang-big-crunch.txt";
+    //String fileName = "buildings.txt";
     //String fileName = "smalldemo.txt";
     //String fileName = "toh-3.txt";
     //String fileName = "toh-3.txt";

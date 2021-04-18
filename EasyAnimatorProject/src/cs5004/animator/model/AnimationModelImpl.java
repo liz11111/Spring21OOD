@@ -53,10 +53,10 @@ public class AnimationModelImpl implements AnimationModel {
     for (Shape s : animationHistory.keySet()) {
       List<Animation> list = animationHistory.get(s);
       Shape newS = s.getCopy();
-      for (Animation animation : list) {
-        if (tickTime > animation.getEndTime()) {
+      for (Animation animation: list) {
+        if (tickTime >= animation.getEndTime()) {
           newS = animation.getShape().getCopy();
-        } else if (tickTime >= animation.getStartTime() && tickTime <= animation.getEndTime()) {
+        } else if (tickTime >= animation.getStartTime() && tickTime < animation.getEndTime()) {
           if (animation instanceof ChangeColor) {
             newS.setColor(animation.getColorAtTick(tickTime));
           } else if (animation instanceof Scale) {
@@ -67,7 +67,9 @@ public class AnimationModelImpl implements AnimationModel {
         }
 
       }
-      shapeList.add(newS);
+      if (tickTime >= s.getAppearTime()) {
+        shapeList.add(newS);
+      }
     }
 
     return shapeList;
@@ -168,7 +170,7 @@ public class AnimationModelImpl implements AnimationModel {
           throws IllegalArgumentException {
     if (!animationHistory.containsKey(shape)) {
       throw new IllegalArgumentException("No such shape");
-    } else if (startTime >= endTime) {
+    } else if (startTime > endTime) {
       throw new IllegalArgumentException("Invalid times.");
     } else if (!checkWithinLifetime(shape, startTime, endTime)) {
       throw new IllegalArgumentException("Operation span is outside of shape's lifetime.");
@@ -350,18 +352,21 @@ public class AnimationModelImpl implements AnimationModel {
         }
       }
 
-      if (x1 != x1 || y1 != y2) {
-        this.model.move(shapeMap.get(name), new Position(x2, y2), t1, t2);
-      }
+      this.model.move(shapeMap.get(name), new Position(x2, y2), t1, t2);
+      this.model.scale(shapeMap.get(name), w1 != w2 ? 1 : 2, w1 != w2? w2:h2, t1, t2);
+      this.model.changeColor(shapeMap.get(name), new Color(r2, g2, b2), t1, t2);
 
-      if (w1 != w2 || h1 != h2) {
-        this.model.scale(shapeMap.get(name), w1 != w2 ? 1 : 2, w1 != w2 ? w2 : h2, t1, t2);
-      }
-
-      if (r1 != r2 || g1 != g2 || b1 != b2) {
-        this.model.changeColor(shapeMap.get(name), new Color(r2, g2, b2), t1, t2);
-      }
-
+//      if (x1 != x1 || y1 != y2) {
+//        this.model.move(shapeMap.get(name), new Position(x2, y2), t1, t2);
+//      }
+//
+//      if (w1 != w2 || h1 != h2) {
+//        this.model.scale(shapeMap.get(name), w1 != w2 ? 1 : 2, w1 != w2? w2:h2, t1, t2);
+//      }
+//
+//      if (r1 != r2 || g1 != g2 || b1 != b2) {
+//        this.model.changeColor(shapeMap.get(name), new Color(r2, g2, b2), t1, t2);
+//      }
       return this;
     }
   }

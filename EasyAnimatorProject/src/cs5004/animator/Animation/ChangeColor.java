@@ -42,6 +42,10 @@ public class ChangeColor extends AbstractAnimation {
 
   @Override
   public Color getColorAtTick(int t) {
+    if (this.startTime == this.endTime) {
+      return new Color(this.toShape.getColor().getR(), this.toShape.getColor().getG(),
+          this.toShape.getColor().getB());
+    }
     int midR = this.fromShape.getColor().getR() * (this.endTime - t) / (this.endTime - this.startTime)
             + this.toShape.getColor().getR() * (t - this.startTime) / (this.endTime - this.startTime);
     int midG = this.fromShape.getColor().getG() * (this.endTime - t) / (this.endTime - this.startTime)

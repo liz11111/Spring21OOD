@@ -54,4 +54,20 @@ public class Color {
   public int getB() {
     return b;
   }
+
+  @Override
+  public boolean equals(Object o) {
+    if (o == this) {
+      return true;
+    }
+
+    if (!(o instanceof Color)) {
+      return false;
+    }
+
+    Color colorObj = (Color) o;
+
+    return (colorObj.getR() == this.getR() && colorObj.getG() == this.getR() && colorObj.getB() ==
+        this.getB());
+  }
 }

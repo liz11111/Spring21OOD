@@ -47,6 +47,11 @@ public class Scale extends AbstractAnimation {
 
   @Override
   public double[] getScaleAtTick(int t) {
+    if (this.startTime == this.endTime) {
+      return new double[]{this.toShape.getSize()[0], this.toShape.getSize()[0]};
+    }
+
+
     double width = this.fromShape.getSize()[0] * (this.endTime - t) / (this.endTime - this.startTime) +
             this.toShape.getSize()[0] * (t - this.startTime) / (this.endTime - this.startTime);
     double height = this.fromShape.getSize()[1] * (this.endTime - t) / (this.endTime - this.startTime) +
