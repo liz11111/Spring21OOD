@@ -1,24 +1,26 @@
 package cs5004.animator.model;
 
-import cs5004.animator.Shape.Oval;
-import cs5004.animator.Shape.Rectangle;
+import cs5004.animator.shape.Oval;
+import cs5004.animator.shape.Rectangle;
 import cs5004.animator.util.AnimationBuilder;
+
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.PriorityQueue;
 
-import cs5004.animator.Animation.Animation;
-import cs5004.animator.Animation.ChangeColor;
-import cs5004.animator.Animation.Display;
-import cs5004.animator.Animation.Move;
-import cs5004.animator.Animation.Scale;
-import cs5004.animator.Animation.Vanish;
-import cs5004.animator.Shape.Color;
-import cs5004.animator.Shape.Position;
-import cs5004.animator.Shape.Shape;
+import cs5004.animator.animation.Animation;
+import cs5004.animator.animation.ChangeColor;
+import cs5004.animator.animation.Display;
+import cs5004.animator.animation.Move;
+import cs5004.animator.animation.Scale;
+import cs5004.animator.animation.Vanish;
+import cs5004.animator.shape.Color;
+import cs5004.animator.shape.Position;
+import cs5004.animator.shape.Shape;
 
 /**
  * AnimationModelImpl implements all functionalities of AnimationModel interface.
@@ -34,9 +36,15 @@ public class AnimationModelImpl implements AnimationModel {
    * Constructor for AnimationModelImpl.
    */
   public AnimationModelImpl() {
-    animationHistory = new HashMap<>();
+    animationHistory = new LinkedHashMap<>();
   }
 
+  /**
+   * addShape adds a shape to the model.
+   *
+   * @param shape Shape shape to add
+   * @throws IllegalStateException if Shape already exists
+   */
   public void addShape(Shape shape) throws IllegalStateException {
     if (animationHistory.containsKey(shape)) {
       throw new IllegalStateException("Shape already exists.");
@@ -47,12 +55,19 @@ public class AnimationModelImpl implements AnimationModel {
     animationHistory.put(shape, animations);
   }
 
+  /**
+   * getShapeAtTick returns all shape's states at a given tick.
+   *
+   * @param tickTime int tick time
+   * @return List<Shape> all shape states</Shape>
+   */
   public List<Shape> getShapeAtTick(int tickTime) {
     List<Shape> shapeList = new ArrayList<>();
-    for (Shape s: animationHistory.keySet()) {
+    for (Shape s : animationHistory.keySet()) {
       List<Animation> list = animationHistory.get(s);
+      int disappearTime = list.get(list.size() - 2).getEndTime();
       Shape newS = s.getCopy();
-      for (Animation animation: list) {
+      for (Animation animation : list) {
         if (tickTime >= animation.getEndTime()) {
           newS = animation.getShape().getCopy();
         } else if (tickTime >= animation.getStartTime() && tickTime < animation.getEndTime()) {
@@ -66,14 +81,12 @@ public class AnimationModelImpl implements AnimationModel {
         }
 
       }
-      if (tickTime >= s.getAppearTime()) {
+      if (tickTime >= s.getAppearTime() && tickTime <= disappearTime) {
         shapeList.add(newS);
       }
     }
 
     return shapeList;
-
-
   }
 
   public void removeShape(Shape shape) {
@@ -91,13 +104,10 @@ public class AnimationModelImpl implements AnimationModel {
   private boolean checkWithinLifetime(Shape shape, int startTime, int endTime) {
     List<Animation> animations = animationHistory.get(shape);
     // check if move operation is within lifetime of this shape
-    if (startTime < animations.get(0).getEndTime()
+    return !(startTime < animations.get(0).getEndTime()
             || startTime > animations.get(animations.size() - 1).getStartTime()
             || endTime < animations.get(0).getEndTime()
-            || endTime > animations.get(animations.size() - 1).getStartTime()) {
-      return false;
-    }
-    return true;
+            || endTime > animations.get(animations.size() - 1).getStartTime());
   }
 
   /**
@@ -160,7 +170,7 @@ public class AnimationModelImpl implements AnimationModel {
   }
 
   /**
-   * checkAnimation checks whether an animation is valid to add
+   * checkAnimation checks whether an animation is valid to add.
    *
    * @param shape     Shape shape to animate
    * @param startTime int start time of animation
@@ -261,8 +271,18 @@ public class AnimationModelImpl implements AnimationModel {
     return this.topBound;
   }
 
+  @Override
   public Map<Shape, List<Animation>> getAnimationHistory() {
     return animationHistory;
+  }
+
+  @Override
+  public int getAnimationEndTick() {
+    int endTick = 0;
+    for (List<Animation> list: this.animationHistory.values()) {
+      endTick = Math.max(endTick, list.get(list.size() - 2).getEndTime());
+    }
+    return endTick;
   }
 
   @Override
@@ -297,6 +317,14 @@ public class AnimationModelImpl implements AnimationModel {
     return sb.toString();
   }
 
+  /**
+   * setBounds set canvas bounds.
+   *
+   * @param x      int x
+   * @param y      int y
+   * @param width  int width
+   * @param height int height
+   */
   public void setBounds(int x, int y, int width, int height) {
     this.leftBound = x;
     this.topBound = y;
@@ -305,6 +333,9 @@ public class AnimationModelImpl implements AnimationModel {
 
   }
 
+  /**
+   * Builder is an inner class that builds the animation.
+   */
   public static class Builder implements AnimationBuilder<AnimationModel> {
     private AnimationModelImpl model = new AnimationModelImpl();
     private Map<String, Shape> shapeMap = new HashMap<>();
@@ -330,20 +361,23 @@ public class AnimationModelImpl implements AnimationModel {
 
     @Override
     public AnimationBuilder<AnimationModel> addMotion(String name, int t1, int x1, int y1,
-        int w1, int h1, int r1, int g1, int b1, int t2, int x2, int y2, int w2, int h2, int r2,
-        int g2, int b2) {
+                                                      int w1, int h1,
+                                                      int r1, int g1, int b1,
+                                                      int t2, int x2, int y2,
+                                                      int w2, int h2,
+                                                      int r2, int g2, int b2) {
       if (shapeMap.get(name) == null) {
         String type = nameMap.get(name);
         switch (type) {
           case "rectangle":
             Rectangle rec = new Rectangle(name, new Position(x1, y1), new Color(r1, g1, b1),
-                t1, t1, w1, h1);
+                    t1, t1, w1, h1);
             this.model.addShape(rec);
             shapeMap.put(name, rec);
             break;
           case "ellipse":
             Oval oval = new Oval(name, new Position(x1, y1), new Color(r1, g1, b1),
-                t1, t1, w1, h1);
+                    t1, t1, w1, h1);
             this.model.addShape(oval);
             shapeMap.put(name, oval);
             break;
@@ -353,20 +387,8 @@ public class AnimationModelImpl implements AnimationModel {
       }
 
       this.model.move(shapeMap.get(name), new Position(x2, y2), t1, t2);
-      this.model.scale(shapeMap.get(name), w1 != w2 ? 1 : 2, w1 != w2? w2:h2, t1, t2);
+      this.model.scale(shapeMap.get(name), w1 != w2 ? 1 : 2, w1 != w2 ? w2 : h2, t1, t2);
       this.model.changeColor(shapeMap.get(name), new Color(r2, g2, b2), t1, t2);
-
-//      if (x1 != x1 || y1 != y2) {
-//        this.model.move(shapeMap.get(name), new Position(x2, y2), t1, t2);
-//      }
-//
-//      if (w1 != w2 || h1 != h2) {
-//        this.model.scale(shapeMap.get(name), w1 != w2 ? 1 : 2, w1 != w2? w2:h2, t1, t2);
-//      }
-//
-//      if (r1 != r2 || g1 != g2 || b1 != b2) {
-//        this.model.changeColor(shapeMap.get(name), new Color(r2, g2, b2), t1, t2);
-//      }
 
       return this;
     }

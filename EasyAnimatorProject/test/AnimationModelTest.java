@@ -9,14 +9,14 @@ import org.junit.Test;
 
 import cs5004.animator.model.AnimationModel;
 import cs5004.animator.model.AnimationModelImpl;
-import cs5004.animator.Shape.Circle;
-import cs5004.animator.Shape.Color;
-import cs5004.animator.Shape.Oval;
-import cs5004.animator.Shape.Parallelogram;
-import cs5004.animator.Shape.Position;
-import cs5004.animator.Shape.Rectangle;
-import cs5004.animator.Shape.Shape;
-import cs5004.animator.Shape.Square;
+import cs5004.animator.shape.Circle;
+import cs5004.animator.shape.Color;
+import cs5004.animator.shape.Oval;
+import cs5004.animator.shape.Parallelogram;
+import cs5004.animator.shape.Position;
+import cs5004.animator.shape.Rectangle;
+import cs5004.animator.shape.Shape;
+import cs5004.animator.shape.Square;
 
 /**
  * Junit test for the animation model.
