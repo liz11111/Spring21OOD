@@ -165,6 +165,7 @@ public class Controller implements ActionListener, KeyListener {
 
   @Override
   public void keyTyped(KeyEvent e) {
+    //No action needed
   }
 
   @Override
@@ -194,12 +195,14 @@ public class Controller implements ActionListener, KeyListener {
           this.view.enableLooping();
         }
         break;
+      default:
+        throw new IllegalArgumentException("Invalid key code.");
     }
     this.view.resetFocus();
   }
 
   @Override
   public void keyReleased(KeyEvent e) {
-
+    //No action needed
   }
 }

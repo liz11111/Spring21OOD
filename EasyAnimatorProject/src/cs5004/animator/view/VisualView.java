@@ -2,12 +2,14 @@ package cs5004.animator.view;
 
 import cs5004.animator.model.ReadOnlyModel;
 import cs5004.animator.shape.Shape;
+
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyListener;
 import java.util.List;
+
 import javax.swing.BorderFactory;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -32,10 +34,10 @@ public class VisualView extends JFrame implements EditorView {
   private boolean isPlaying;
   private boolean loopEnable;
 
-  private JPanel mainPanel;
+  /*private JPanel mainPanel;
   private JPanel sideBar;
   private JPanel buttonPanel;
-  private JPanel filePanel;
+  private JPanel filePanel;*/
   private MyPanel panel;
   private JLabel speedDisplay;
 
@@ -54,7 +56,7 @@ public class VisualView extends JFrame implements EditorView {
    * @throws IllegalArgumentException if the model is null
    */
   public VisualView(ReadOnlyModel model)
-      throws IllegalArgumentException {
+          throws IllegalArgumentException {
     super();
     if (model == null) {
       throw new IllegalArgumentException("The model can't be null.");
@@ -70,70 +72,69 @@ public class VisualView extends JFrame implements EditorView {
     this.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
     // set side bar
-    this.sideBar = new JPanel();
-    this.sideBar.setPreferredSize(new Dimension(200, 600));
-    this.sideBar.setLayout(new BoxLayout(sideBar, BoxLayout.Y_AXIS));
-    this.add(this.sideBar);
+    JPanel sideBar = new JPanel();
+    sideBar.setPreferredSize(new Dimension(200, 600));
+    sideBar.setLayout(new BoxLayout(sideBar, BoxLayout.Y_AXIS));
+    this.add(sideBar);
 
     // add file panel
-    this.filePanel = new JPanel();
-    this.filePanel.setLayout(new BoxLayout(filePanel, BoxLayout.Y_AXIS));
-    this.filePanel.setBorder(BorderFactory.createTitledBorder("File Management"));
+    JPanel filePanel = new JPanel();
+    filePanel.setLayout(new BoxLayout(filePanel, BoxLayout.Y_AXIS));
+    filePanel.setBorder(BorderFactory.createTitledBorder("File Management"));
 
     this.openFile = new JButton("Open A File");
     this.openFile.setPreferredSize(new Dimension(150, 30));
     this.openFile.setActionCommand("OpenFile");
-    this.filePanel.add(openFile);
+    filePanel.add(openFile);
 
-    this.filePanel.add(new JLabel("    "));
+    filePanel.add(new JLabel("    "));
 
     this.saveFile = new JButton("Save as");
     this.saveFile.setPreferredSize(new Dimension(150, 30));
     this.saveFile.setActionCommand("SaveFile");
-    this.filePanel.add(saveFile);
+    filePanel.add(saveFile);
 
-    this.sideBar.add(this.filePanel);
+    sideBar.add(filePanel);
 
-    this.sideBar.add(new JLabel("   "));
+    sideBar.add(new JLabel("   "));
 
     // add shape management panel
 
     // set main panel
-    this.mainPanel = new JPanel();
-    this.mainPanel.setPreferredSize(new Dimension(800, 600));
-    this.mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.PAGE_AXIS));
+    JPanel mainPanel = new JPanel();
+    mainPanel.setPreferredSize(new Dimension(800, 600));
+    mainPanel.setLayout(new BoxLayout(mainPanel, BoxLayout.PAGE_AXIS));
 
-//    // set file panel
-//    this.filePanel = new JPanel();
-//    this.filePanel.setLayout(new FlowLayout());
-//
-//    this.openFile = new JButton("Open A File");
-//    this.openFile.setPreferredSize(new Dimension(150, 30));
-//    this.openFile.setActionCommand("OpenFile");
-//    this.filePanel.add(openFile);
-//
-//    this.saveFile = new JButton("Save as");
-//    this.saveFile.setPreferredSize(new Dimension(150, 30));
-//    this.saveFile.setActionCommand("SaveFile");
-//    this.filePanel.add(saveFile);
-//
-//    this.mainPanel.add(this.filePanel);
+    //    set file panel
+    //    this.filePanel = new JPanel();
+    //    this.filePanel.setLayout(new FlowLayout());
+    //
+    //    this.openFile = new JButton("Open A File");
+    //    this.openFile.setPreferredSize(new Dimension(150, 30));
+    //    this.openFile.setActionCommand("OpenFile");
+    //    this.filePanel.add(openFile);
+    //
+    //    this.saveFile = new JButton("Save as");
+    //    this.saveFile.setPreferredSize(new Dimension(150, 30));
+    //    this.saveFile.setActionCommand("SaveFile");
+    //    this.filePanel.add(saveFile);
+    //    this.mainPanel.add(this.filePanel);
 
     // set panel
     this.panel = new MyPanel(this.model.getLeftBound(), this.model.getTopBound());
     this.panel.setBackground(Color.WHITE);
     this.panel.setPreferredSize(new Dimension(this.model.getCanvasWidth(),
-        this.model.getCanvasHeight()));
-    this.mainPanel.add(this.panel);
-    this.mainPanel.add(new JScrollPane(this.panel, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
-        JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS));
+            this.model.getCanvasHeight()));
+    mainPanel.add(this.panel);
+    mainPanel.add(new JScrollPane(this.panel, JScrollPane.VERTICAL_SCROLLBAR_ALWAYS,
+            JScrollPane.HORIZONTAL_SCROLLBAR_ALWAYS));
 
     // set button panel
-    this.buttonPanel = new JPanel();
-    this.buttonPanel.setBackground(Color.LIGHT_GRAY);
-//    this.buttonPanel.setBorder(BorderFactory.createTitledBorder("Playback Control"));
-    this.buttonPanel.setPreferredSize(new Dimension(500, 40));
-    this.buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.LINE_AXIS));
+    JPanel buttonPanel = new JPanel();
+    buttonPanel.setBackground(Color.LIGHT_GRAY);
+    // this.buttonPanel.setBorder(BorderFactory.createTitledBorder("Playback Control"));
+    buttonPanel.setPreferredSize(new Dimension(500, 40));
+    buttonPanel.setLayout(new BoxLayout(buttonPanel, BoxLayout.LINE_AXIS));
 
     // play control
     JPanel playControl = new JPanel();
@@ -157,7 +158,7 @@ public class VisualView extends JFrame implements EditorView {
 
     playControl.add(new JLabel("     "));
 
-    this.buttonPanel.add(playControl);
+    buttonPanel.add(playControl);
 
     //this.buttonPanel.add(new JLabel("        "));
 
@@ -175,7 +176,7 @@ public class VisualView extends JFrame implements EditorView {
 
     detailControl.add(new JLabel("      "));
 
-    this.buttonPanel.add(detailControl);
+    buttonPanel.add(detailControl);
     //this.buttonPanel.add(new JLabel("      "));
 
     // speed setting
@@ -205,11 +206,11 @@ public class VisualView extends JFrame implements EditorView {
 
     speedControl.add(new JLabel("      "));
 
-    this.buttonPanel.add(speedControl);
+    buttonPanel.add(speedControl);
 
-    this.mainPanel.add(this.buttonPanel);
+    mainPanel.add(buttonPanel);
 
-    this.add(this.sideBar, BorderLayout.WEST);
+    this.add(sideBar, BorderLayout.WEST);
 
     this.add(mainPanel, BorderLayout.CENTER);
 
@@ -316,7 +317,7 @@ public class VisualView extends JFrame implements EditorView {
   @Override
   public void showingErrorMessage(String msg) {
     JOptionPane.showMessageDialog(this, msg, "Error",
-        JOptionPane.ERROR_MESSAGE);
+            JOptionPane.ERROR_MESSAGE);
   }
 
   @Override

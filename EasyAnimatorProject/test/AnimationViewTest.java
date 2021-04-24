@@ -29,7 +29,7 @@ public class AnimationViewTest {
     model = AnimationReader.parseFile(inFile, new AnimationModelImpl.Builder());
     System.setOut(new PrintStream(outputStreamCaptor));
   }
-/*
+
   @Test
   public void testTextualView0() {
     View myView = new TextualView(model, System.out);
@@ -115,7 +115,7 @@ public class AnimationViewTest {
                     "Shape disk1 moves from (190.0,50.0) to (490.0,180.0) from t=239 to t=249\n" +
                     "Shape disk1 changes color from (0,49,90) to (0,255,0) from t=249 to t=257",
             outputStreamCaptor.toString().trim());
-  }*/
+  }
 
   @Test(expected = IllegalArgumentException.class)
   public void testTextualIllegalArgument() {
