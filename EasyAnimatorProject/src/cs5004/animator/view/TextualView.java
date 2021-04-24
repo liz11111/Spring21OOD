@@ -1,5 +1,7 @@
 package cs5004.animator.view;
 
+import java.io.FileWriter;
+import java.io.IOException;
 import java.io.PrintStream;
 import java.util.Comparator;
 import java.util.List;
@@ -17,6 +19,7 @@ import cs5004.animator.model.ReadOnlyModel;
 public class TextualView implements View {
   private ReadOnlyModel model;
   private PrintStream out;
+  private String animationText;
 
   /**
    * Constructor for TextualView.
@@ -67,10 +70,29 @@ public class TextualView implements View {
 
     sb.deleteCharAt(sb.length() - 1);
     out.println(sb.toString());
+
+    this.animationText = sb.toString();
   }
 
   @Override
   public void showErrorMessage(String errorMessage) {
     out.println(errorMessage);
+  }
+
+  /**
+   * Save the result as a txt file.
+   *
+   * @param filePath String file path
+   * @throws IOException if the file path not found
+   */
+  public void saveTxt(String filePath) throws IOException {
+    FileWriter writer = new FileWriter(filePath);
+    try {
+      writer.write(this.animationText);
+      writer.flush();
+      writer.close();
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
   }
 }

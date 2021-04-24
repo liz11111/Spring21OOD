@@ -53,4 +53,11 @@ public interface ReadOnlyModel {
    */
   Map<Shape, List<Animation>> getAnimationHistory();
 
+  /**
+   * Returns the tick that the animation ends.
+   *
+   * @return the tick that the animation ends
+   */
+  int getAnimationEndTick();
+
 }

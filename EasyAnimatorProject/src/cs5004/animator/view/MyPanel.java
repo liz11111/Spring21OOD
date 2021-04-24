@@ -50,6 +50,10 @@ class MyPanel extends JPanel {
     super.paintComponent(g);
     Graphics2D g2d = (Graphics2D) g;
 
+    if (this.shapeList == null) {
+      return;
+    }
+
     for (Shape shape : this.shapeList) {
       g2d.setColor(new Color((int) shape.getColor().getR(), (int) shape.getColor().getG(),
               (int) shape.getColor().getB()));

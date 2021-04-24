@@ -7,6 +7,7 @@ import cs5004.animator.util.AnimationBuilder;
 import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.HashMap;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.PriorityQueue;
@@ -35,7 +36,7 @@ public class AnimationModelImpl implements AnimationModel {
    * Constructor for AnimationModelImpl.
    */
   public AnimationModelImpl() {
-    animationHistory = new HashMap<>();
+    animationHistory = new LinkedHashMap<>();
   }
 
   /**
@@ -64,6 +65,7 @@ public class AnimationModelImpl implements AnimationModel {
     List<Shape> shapeList = new ArrayList<>();
     for (Shape s : animationHistory.keySet()) {
       List<Animation> list = animationHistory.get(s);
+      int disappearTime = list.get(list.size() - 2).getEndTime();
       Shape newS = s.getCopy();
       for (Animation animation : list) {
         if (tickTime >= animation.getEndTime()) {
@@ -79,7 +81,7 @@ public class AnimationModelImpl implements AnimationModel {
         }
 
       }
-      if (tickTime >= s.getAppearTime()) {
+      if (tickTime >= s.getAppearTime() && tickTime <= disappearTime) {
         shapeList.add(newS);
       }
     }
@@ -275,6 +277,15 @@ public class AnimationModelImpl implements AnimationModel {
   }
 
   @Override
+  public int getAnimationEndTick() {
+    int endTick = 0;
+    for (List<Animation> list : this.animationHistory.values()) {
+      endTick = Math.max(endTick, list.get(list.size() - 2).getEndTime());
+    }
+    return endTick;
+  }
+
+  @Override
   public String toString() {
     StringBuilder sb = new StringBuilder();
     sb.append("Shapes: \n");
@@ -323,7 +334,8 @@ public class AnimationModelImpl implements AnimationModel {
   }
 
   /**
-   * Builder is an inner class thats builds the animation.
+   * <<<<<<< HEAD Builder is an inner class thats builds the animation. ======= Builder is an inner
+   * class that builds the animation. >>>>>>> origin/yifan
    */
   public static class Builder implements AnimationBuilder<AnimationModel> {
     private AnimationModelImpl model = new AnimationModelImpl();
